@@ -295,9 +295,44 @@
     });
   };
 
+  const initImageZoom = () => {
+    const articleContent = document.querySelector('.article__content');
+    if (!articleContent) return;
+
+    const viewer = new Viewer(articleContent, {
+      url: 'src',
+      filter(img) {
+        const isCodeIcon = img.closest('.code-area');
+        const isAvatar = img.classList.contains('sidebar__avatar');
+        return !isCodeIcon && !isAvatar;
+      },
+      title: (image) => {
+        return image.alt || image.title || '图片预览';
+      },
+      navbar: false,
+      toolbar: {
+        zoomIn: 4,
+        zoomOut: 4,
+        oneToOne: 4,
+        reset: 4,
+        prev: 0,
+        play: 0,
+        next: 0,
+        rotateLeft: 4,
+        rotateRight: 4,
+        flipHorizontal: 4,
+        flipVertical: 4,
+      },
+      zoomRatio: 0.1, 
+      minZoomRatio: 0.01,
+      maxZoomRatio: 100,
+    });
+  };
+
   initDrawer();
   initPostToc();
   initReadingProgress();
   initCodeArea();
   initImageCaptions();
+  initImageZoom();
 })();
