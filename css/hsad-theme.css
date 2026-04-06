@@ -909,6 +909,14 @@ img {
   overflow: auto;
   padding-left: 1rem;
   border-left: 1px solid var(--line);
+  /* 下面两行用来隐藏 Firefox 和 IE/Edge 的滚动条 */
+  scrollbar-width: none; 
+  -ms-overflow-style: none; 
+}
+
+/* 下面这块用来隐藏 Chrome, Safari, 和较新 Edge 的滚动条 */
+.post-toc::-webkit-scrollbar {
+  display: none; 
 }
 
 .post-toc .post-toc__list,
