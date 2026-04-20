@@ -15,8 +15,12 @@
   --content-width: 40rem;
   --toc-width: 13.5rem;
   --post-shell-width: calc(var(--content-width) + var(--toc-width) + 3rem);
-  --font-serif: "Iowan Old Style", "Palatino Linotype", "Book Antiqua", "Songti SC", "STSong", serif;
-  --font-sans: -apple-system, BlinkMacSystemFont, "SF Pro Text", "PingFang SC", "Hiragino Sans GB", "Helvetica Neue", sans-serif;
+  --font-serif:
+    "Iowan Old Style", "Palatino Linotype", "Book Antiqua", "Songti SC",
+    "STSong", serif;
+  --font-sans:
+    -apple-system, BlinkMacSystemFont, "SF Pro Text", "PingFang SC",
+    "Hiragino Sans GB", "Helvetica Neue", sans-serif;
 }
 
 *,
@@ -34,7 +38,11 @@ body {
   margin: 0;
   min-height: 100vh;
   background:
-    radial-gradient(circle at top left, rgba(224, 206, 183, 0.34), transparent 32%),
+    radial-gradient(
+      circle at top left,
+      rgba(224, 206, 183, 0.34),
+      transparent 32%
+    ),
     linear-gradient(180deg, #f7f4ef 0%, #fbf9f5 46%, #fffdfa 100%);
   color: var(--text);
   font-family: var(--font-sans);
@@ -96,7 +104,11 @@ img {
   display: block;
   width: 100%;
   height: 100%;
-  background: linear-gradient(90deg, rgba(92, 119, 147, 0.82), rgba(140, 165, 188, 0.78));
+  background: linear-gradient(
+    90deg,
+    rgba(92, 119, 147, 0.82),
+    rgba(140, 165, 188, 0.78)
+  );
   transform-origin: left center;
   transform: scaleX(0);
   transition: transform 90ms linear;
@@ -207,7 +219,10 @@ img {
   width: fit-content;
   font-size: 0.9rem;
   color: rgba(255, 250, 246, 0.86);
-  transition: transform 160ms ease, color 160ms ease, opacity 160ms ease;
+  transition:
+    transform 160ms ease,
+    color 160ms ease,
+    opacity 160ms ease;
 }
 
 .sidebar__nav a:hover,
@@ -259,7 +274,10 @@ img {
 
 .article-layout--with-toc {
   display: grid;
-  grid-template-columns: minmax(0, var(--content-width)) minmax(11.5rem, var(--toc-width));
+  grid-template-columns: minmax(0, var(--content-width)) minmax(
+      11.5rem,
+      var(--toc-width)
+    );
   grid-template-areas: "main toc";
   column-gap: clamp(1.4rem, 3vw, 3rem);
   align-items: start;
@@ -688,7 +706,9 @@ img {
   height: 12px;
   top: 14px;
   left: 15px;
-  box-shadow: 20px 0 #ffbd2e, 40px 0 #27c93f;
+  box-shadow:
+    20px 0 #ffbd2e,
+    40px 0 #27c93f;
   z-index: 2;
 }
 
@@ -725,7 +745,9 @@ img {
   right: 12px;
   cursor: pointer;
   font-size: 1rem;
-  transition: transform 0.3s ease, color 0.2s;
+  transition:
+    transform 0.3s ease,
+    color 0.2s;
 }
 
 .code-area .code-expand:hover {
@@ -812,6 +834,41 @@ img {
 .code-area figure.highlight .code pre {
   padding: 0 !important;
   overflow: visible;
+}
+
+/* ----------------------------------------------------
+   代码块滚动条美化 - macOS 极简风格
+   ---------------------------------------------------- */
+/* 兼容 Firefox */
+.code-area pre,
+.code-area figure.highlight {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
+}
+
+/* Chrome, Edge, Safari */
+.code-area pre::-webkit-scrollbar,
+.code-area figure.highlight::-webkit-scrollbar {
+  height: 6px; /* 横向滚动条的高度 */
+  width: 6px; /* 纵向滚动条的宽度 */
+}
+
+.code-area pre::-webkit-scrollbar-track,
+.code-area figure.highlight::-webkit-scrollbar-track {
+  background: transparent; /* 轨道透明 */
+  border-radius: 4px;
+}
+
+.code-area pre::-webkit-scrollbar-thumb,
+.code-area figure.highlight::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2); /* 半透明白色拖动块 */
+  border-radius: 4px;
+  transition: background 0.3s ease;
+}
+
+.code-area pre::-webkit-scrollbar-thumb:hover,
+.code-area figure.highlight::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.4); /* 鼠标悬浮时加深 */
 }
 
 /* ----------------------------------------------------
@@ -910,13 +967,13 @@ img {
   padding-left: 1rem;
   border-left: 1px solid var(--line);
   /* 下面两行用来隐藏 Firefox 和 IE/Edge 的滚动条 */
-  scrollbar-width: none; 
-  -ms-overflow-style: none; 
+  scrollbar-width: none;
+  -ms-overflow-style: none;
 }
 
 /* 下面这块用来隐藏 Chrome, Safari, 和较新 Edge 的滚动条 */
 .post-toc::-webkit-scrollbar {
-  display: none; 
+  display: none;
 }
 
 .post-toc .post-toc__list,
@@ -946,7 +1003,9 @@ img {
   color: var(--text-soft);
   font-size: 0.82rem;
   line-height: 1.55;
-  transition: color 160ms ease, transform 160ms ease;
+  transition:
+    color 160ms ease,
+    transform 160ms ease;
 }
 
 .post-toc .post-toc__list-link:hover,
@@ -1002,7 +1061,10 @@ img {
   border-radius: 1.15rem;
   padding: 1.05rem 1.1rem;
   box-shadow: 0 12px 22px rgba(38, 54, 74, 0.05);
-  transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
+  transition:
+    transform 180ms ease,
+    box-shadow 180ms ease,
+    border-color 180ms ease;
 }
 
 .tax-card:hover,
@@ -1358,11 +1420,53 @@ img {
   }
 }
 
-.hljs-comment, .hljs-quote { color: #5c6370; font-style: italic; }
-.hljs-doctag, .hljs-keyword, .hljs-formula { color: #c678dd; }
-.hljs-section, .hljs-name, .hljs-selector-tag, .hljs-deletion, .hljs-subst { color: #e06c75; }
-.hljs-literal { color: #56b6c2; }
-.hljs-string, .hljs-regexp, .hljs-addition, .hljs-attribute, .hljs-meta .hljs-string { color: #98c379; }
-.hljs-built_in, .hljs-class .hljs-title, .hljs-title.class_ { color: #e6c07b; }
-.hljs-attr, .hljs-variable, .hljs-template-variable, .hljs-type, .hljs-selector-class, .hljs-selector-attr, .hljs-selector-pseudo, .hljs-number { color: #d19a66; }
-.hljs-symbol, .hljs-bullet, .hljs-link, .hljs-meta, .hljs-selector-id, .hljs-title { color: #61afef; }
+.hljs-comment,
+.hljs-quote {
+  color: #5c6370;
+  font-style: italic;
+}
+.hljs-doctag,
+.hljs-keyword,
+.hljs-formula {
+  color: #c678dd;
+}
+.hljs-section,
+.hljs-name,
+.hljs-selector-tag,
+.hljs-deletion,
+.hljs-subst {
+  color: #e06c75;
+}
+.hljs-literal {
+  color: #56b6c2;
+}
+.hljs-string,
+.hljs-regexp,
+.hljs-addition,
+.hljs-attribute,
+.hljs-meta .hljs-string {
+  color: #98c379;
+}
+.hljs-built_in,
+.hljs-class .hljs-title,
+.hljs-title.class_ {
+  color: #e6c07b;
+}
+.hljs-attr,
+.hljs-variable,
+.hljs-template-variable,
+.hljs-type,
+.hljs-selector-class,
+.hljs-selector-attr,
+.hljs-selector-pseudo,
+.hljs-number {
+  color: #d19a66;
+}
+.hljs-symbol,
+.hljs-bullet,
+.hljs-link,
+.hljs-meta,
+.hljs-selector-id,
+.hljs-title {
+  color: #61afef;
+}
