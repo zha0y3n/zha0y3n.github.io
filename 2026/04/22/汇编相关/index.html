@@ -1,0 +1,728 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="theme-color" content="#496b8c"><meta name="description" content="照烟"><meta name="author" content="照烟"><meta name="generator" content="Hexo 8.1.1"><title>汇编相关 | 照烟</title><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/viewerjs/1.11.6/viewer.min.css"><link rel="stylesheet" href="/css/hsad-theme.css"><script src="https://cdnjs.cloudflare.com/ajax/libs/viewerjs/1.11.6/viewer.min.js"></script><script src="/js/hsad-theme.js" defer></script></head><body class="view-inner view-post"><div class="reading-progress" aria-hidden="true"><span class="reading-progress__bar" data-reading-progress></span></div><div class="page-aura page-aura--one"></div><div class="page-aura page-aura--two"></div><div class="site-shell"><aside class="site-sidebar"><section class="sidebar sidebar--desktop"><div class="sidebar__backdrop" style="background-image:url(/images/background.png)"></div><div class="sidebar__overlay"></div><div class="sidebar__content"><a class="sidebar__brand" href="/"><img class="sidebar__avatar" src="/images/avatar.jpg" alt="照烟"><div class="sidebar__identity"><h2 class="sidebar__title">照烟</h2><p class="sidebar__subtitle">zha0y3n</p></div></a><p class="sidebar__description">结局的彼岸，不再空无一人。</p><nav class="sidebar__nav" aria-label="Primary"><a href="/">首页</a><a href="/archives/">归档</a><a href="/categories/">分类</a><a href="/tags/">标签</a><a href="/links/">友链</a><a href="/about/">关于</a></nav><div class="sidebar__social"><a href="https://github.com/zha0y3n" target="_blank" rel="noopener">GitHub</a><a href="mailto:3509864228@qq.com" target="_blank" rel="noopener">E-Mail</a></div></div></section></aside><div class="mobile-topbar"><button class="mobile-topbar__toggle js-drawer-toggle" type="button" aria-label="Open navigation"><span></span><span></span><span></span></button><a class="mobile-topbar__title" href="/">照烟</a><a class="mobile-topbar__avatar" href="/"><img src="/images/avatar.jpg" alt="照烟"></a></div><div class="mobile-drawer" data-drawer aria-hidden="true"><div class="mobile-drawer__panel"><section class="sidebar sidebar--mobile"><div class="sidebar__backdrop" style="background-image:url(/images/background.png)"></div><div class="sidebar__overlay"></div><div class="sidebar__content"><a class="sidebar__brand" href="/"><img class="sidebar__avatar" src="/images/avatar.jpg" alt="照烟"><div class="sidebar__identity"><h2 class="sidebar__title">照烟</h2><p class="sidebar__subtitle">zha0y3n</p></div></a><p class="sidebar__description">结局的彼岸，不再空无一人。</p><nav class="sidebar__nav" aria-label="Primary"><a href="/">首页</a><a href="/archives/">归档</a><a href="/categories/">分类</a><a href="/tags/">标签</a><a href="/links/">友链</a><a href="/about/">关于</a></nav><div class="sidebar__social"><a href="https://github.com/zha0y3n" target="_blank" rel="noopener">GitHub</a><a href="mailto:3509864228@qq.com" target="_blank" rel="noopener">E-Mail</a></div></div></section></div></div><div class="mobile-backdrop js-drawer-close"></div><main class="site-main"><div class="article-layout article-layout--with-toc"><article class="article"><header class="article__header"><div class="article__eyebrow"><a href="/categories/%E7%AC%94%E8%AE%B0/">笔记</a></div><h1 class="article__title">汇编相关</h1><div class="article__meta"><time datetime="2026-04-22T14:43:05.000Z">2026-04-22</time><span class="article__divider">/</span><span>更新于 2026-04-27</span></div><div class="article__tags"><a class="article__tag" href="/tags/Re/">Re</a></div></header><div class="article__content"><h1 id="基础知识">基础知识</h1>
+<h2 id="汇编的分类">汇编的分类</h2>
+<p>如果按CPU架构分类，汇编语言主要分为x86系列和ARM。</p>
+<ul>
+<li>x86系列：
+<ul>
+<li>16位（8086/8088）：最经典的一集</li>
+<li>32位（x86）：老式程序。在现在的Windows系统中，C盘仍然能看到<code>Program Files (x86)</code>文件夹。这些使用x86指令集的程序使用32位寄存器，且最大只能使用4GB内存。</li>
+<li>64位（x64）：现代计算机的主流，寄存器扩展到了64位。</li>
+</ul>
+</li>
+<li>ARM：主要在移动端和嵌入式领域应用。PC和手机不统一使用x86架构的原因，或者说ARM的优势，在于能效方面。它具有精简的汇编指令集，待机或处理日常任务时功耗极低，适配手机体积小，供电有限的特点。并且ARM的设计允许手机厂商将大部分硬件（如CPU，GPU，基带等）封装在一颗芯片内，设计方面高度灵活（卖ip也是经久不衰了）</li>
+</ul>
+<h2 id="汇编的组成">汇编的组成</h2>
+<p>汇编语言发展至今，主要由以下三种指令组成：</p>
+<ol>
+<li>汇编指令。它们直接控制CPU执行具体的操作，是机器码的助记符。如<code>MOV</code>, <code>ADD</code>, <code>SUB</code>, <code>JMP</code>等。</li>
+<li>伪指令。它们没有对应的机器码，是指导编译器工作的指令，不直接操控CPU。如<code>db</code>, <code>end</code>。</li>
+<li>其他符号。用于完善汇编的可读性和运算的简便性，同样不直接操控CPU，由编译器识别。如<code>+-*/</code>和<code>,;()</code>等。</li>
+</ol>
+<h2 id="存储器和存储单元">存储器和存储单元</h2>
+<p>存储器有很多，如集成在CPU内部的寄存器和三级高速缓存，以及内存（RAM）和外存（Disk）。存储器被划分为若干个存储单元，一个存储单元能存放8bit数据（1Byte）。计算机的存储单元上限不仅由存储器决定，还由CPU的地址总线宽度决定。对于8086架构，它的地址线宽度为20，最大只能使用
+    <span id="mjx-7917d0a8">
+      <style>
+      #mjx-7917d0a8{
+        display:contents;
+        mjx-assistive-mml {
+          user-select: text !important;
+          clip: auto !important;
+          color: rgba(0,0,0,0);
+        }
+        
+mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+  min-height: 1px;
+  min-width: 1px;
+}
+
+mjx-container[jax="SVG"] > svg a {
+  fill: blue;
+  stroke: blue;
+}
+
+mjx-assistive-mml {
+  position: absolute !important;
+  top: 0px;
+  left: 0px;
+  clip: rect(1px, 1px, 1px, 1px);
+  padding: 1px 0px 0px 0px !important;
+  border: 0px !important;
+  display: block !important;
+  width: auto !important;
+  overflow: hidden !important;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+mjx-assistive-mml[display="block"] {
+  width: 100% !important;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][display="true"][width="full"] {
+  display: flex;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line], svg[data-table] > g > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame], svg[data-table] > g > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed, svg[data-table] > g > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted, svg[data-table] > g > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > g > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"] path[data-c], mjx-container[jax="SVG"] use[data-c] {
+  stroke-width: 3;
+}
+
+g[data-mml-node="xypic"] path {
+  stroke-width: inherit;
+}
+
+.MathJax g[data-mml-node="xypic"] path {
+  stroke-width: inherit;
+}
+
+      }
+      </style>
+      <mjx-container class="MathJax" jax="SVG" style="position: relative;"><svg style="vertical-align: 0;" xmlns="http://www.w3.org/2000/svg" width="2.919ex" height="1.887ex" role="img" focusable="false" viewBox="0 -833.9 1290.1 833.9" aria-hidden="true"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="msup"><g data-mml-node="mn"><path data-c="32" d="M109 429Q82 429 66 447T50 491Q50 562 103 614T235 666Q326 666 387 610T449 465Q449 422 429 383T381 315T301 241Q265 210 201 149L142 93L218 92Q375 92 385 97Q392 99 409 186V189H449V186Q448 183 436 95T421 3V0H50V19V31Q50 38 56 46T86 81Q115 113 136 137Q145 147 170 174T204 211T233 244T261 278T284 308T305 340T320 369T333 401T340 431T343 464Q343 527 309 573T212 619Q179 619 154 602T119 569T109 550Q109 549 114 549Q132 549 151 535T170 489Q170 464 154 447T109 429Z"></path></g><g data-mml-node="TeXAtom" transform="translate(533,363) scale(0.707)" data-mjx-texclass="ORD"><g data-mml-node="mn"><path data-c="32" d="M109 429Q82 429 66 447T50 491Q50 562 103 614T235 666Q326 666 387 610T449 465Q449 422 429 383T381 315T301 241Q265 210 201 149L142 93L218 92Q375 92 385 97Q392 99 409 186V189H449V186Q448 183 436 95T421 3V0H50V19V31Q50 38 56 46T86 81Q115 113 136 137Q145 147 170 174T204 211T233 244T261 278T284 308T305 340T320 369T333 401T340 431T343 464Q343 527 309 573T212 619Q179 619 154 602T119 569T109 550Q109 549 114 549Q132 549 151 535T170 489Q170 464 154 447T109 429Z"></path><path data-c="30" d="M96 585Q152 666 249 666Q297 666 345 640T423 548Q460 465 460 320Q460 165 417 83Q397 41 362 16T301 -15T250 -22Q224 -22 198 -16T137 16T82 83Q39 165 39 320Q39 494 96 585ZM321 597Q291 629 250 629Q208 629 178 597Q153 571 145 525T137 333Q137 175 145 125T181 46Q209 16 250 16Q290 16 318 46Q347 76 354 130T362 333Q362 478 354 524T321 597Z" transform="translate(500,0)"></path></g></g></g></g></g></svg><mjx-assistive-mml unselectable="on" display="inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><msup><mn>2</mn><mrow data-mjx-texclass="ORD"><mn>20</mn></mrow></msup></math></mjx-assistive-mml></mjx-container>
+    </span>
+  个存储单元，约为1MB内存。在x86和x64架构中，地址线宽度上升到了32和64。</p>
+<h2 id="CPU的交互">CPU的交互</h2>
+<p>当CPU与外部芯片进行交互时，必需三条信息：</p>
+<ol>
+<li>存储单元（内存）或端口（外设）的地址，归类为地址信息</li>
+<li>（I/O）读写等，归类为控制信息</li>
+<li>要发送或收取的内容，归类为数据信息</li>
+</ol>
+<p>CPU使用地址总线、控制总线和数据总线传输上述信息到外部芯片，或是从外部芯片收取信息。</p>
+<h3 id="地址总线">地址总线</h3>
+<p>对于存储器芯片，我们现在知道了CPU是通过地址总线来定位存储单元的。在计算机中，一根导线通过高低电平区分状态。也就是说，n根导线最多有
+    <span id="mjx-c3d0d5">
+      <style>
+      #mjx-c3d0d5{
+        display:contents;
+        mjx-assistive-mml {
+          user-select: text !important;
+          clip: auto !important;
+          color: rgba(0,0,0,0);
+        }
+        
+mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+  min-height: 1px;
+  min-width: 1px;
+}
+
+mjx-container[jax="SVG"] > svg a {
+  fill: blue;
+  stroke: blue;
+}
+
+mjx-assistive-mml {
+  position: absolute !important;
+  top: 0px;
+  left: 0px;
+  clip: rect(1px, 1px, 1px, 1px);
+  padding: 1px 0px 0px 0px !important;
+  border: 0px !important;
+  display: block !important;
+  width: auto !important;
+  overflow: hidden !important;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+mjx-assistive-mml[display="block"] {
+  width: 100% !important;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][display="true"][width="full"] {
+  display: flex;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line], svg[data-table] > g > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame], svg[data-table] > g > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed, svg[data-table] > g > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted, svg[data-table] > g > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > g > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"] path[data-c], mjx-container[jax="SVG"] use[data-c] {
+  stroke-width: 3;
+}
+
+g[data-mml-node="xypic"] path {
+  stroke-width: inherit;
+}
+
+.MathJax g[data-mml-node="xypic"] path {
+  stroke-width: inherit;
+}
+
+      }
+      </style>
+      <mjx-container class="MathJax" jax="SVG" style="position: relative;"><svg style="vertical-align: 0;" xmlns="http://www.w3.org/2000/svg" width="2.279ex" height="1.528ex" role="img" focusable="false" viewBox="0 -675.5 1007.3 675.5" aria-hidden="true"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="msup"><g data-mml-node="mn"><path data-c="32" d="M109 429Q82 429 66 447T50 491Q50 562 103 614T235 666Q326 666 387 610T449 465Q449 422 429 383T381 315T301 241Q265 210 201 149L142 93L218 92Q375 92 385 97Q392 99 409 186V189H449V186Q448 183 436 95T421 3V0H50V19V31Q50 38 56 46T86 81Q115 113 136 137Q145 147 170 174T204 211T233 244T261 278T284 308T305 340T320 369T333 401T340 431T343 464Q343 527 309 573T212 619Q179 619 154 602T119 569T109 550Q109 549 114 549Q132 549 151 535T170 489Q170 464 154 447T109 429Z"></path></g><g data-mml-node="mi" transform="translate(533,363) scale(0.707)"><path data-c="1D45B" d="M21 287Q22 293 24 303T36 341T56 388T89 425T135 442Q171 442 195 424T225 390T231 369Q231 367 232 367L243 378Q304 442 382 442Q436 442 469 415T503 336T465 179T427 52Q427 26 444 26Q450 26 453 27Q482 32 505 65T540 145Q542 153 560 153Q580 153 580 145Q580 144 576 130Q568 101 554 73T508 17T439 -10Q392 -10 371 17T350 73Q350 92 386 193T423 345Q423 404 379 404H374Q288 404 229 303L222 291L189 157Q156 26 151 16Q138 -11 108 -11Q95 -11 87 -5T76 7T74 17Q74 30 112 180T152 343Q153 348 153 366Q153 405 129 405Q91 405 66 305Q60 285 60 284Q58 278 41 278H27Q21 284 21 287Z"></path></g></g></g></g></svg><mjx-assistive-mml unselectable="on" display="inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><msup><mn>2</mn><mi>n</mi></msup></math></mjx-assistive-mml></mjx-container>
+    </span>
+  种状态。同理，地址线宽度为n的CPU架构最多能访问
+    <span id="mjx-9ee36d78">
+      <style>
+      #mjx-9ee36d78{
+        display:contents;
+        mjx-assistive-mml {
+          user-select: text !important;
+          clip: auto !important;
+          color: rgba(0,0,0,0);
+        }
+        
+mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+  min-height: 1px;
+  min-width: 1px;
+}
+
+mjx-container[jax="SVG"] > svg a {
+  fill: blue;
+  stroke: blue;
+}
+
+mjx-assistive-mml {
+  position: absolute !important;
+  top: 0px;
+  left: 0px;
+  clip: rect(1px, 1px, 1px, 1px);
+  padding: 1px 0px 0px 0px !important;
+  border: 0px !important;
+  display: block !important;
+  width: auto !important;
+  overflow: hidden !important;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+mjx-assistive-mml[display="block"] {
+  width: 100% !important;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][display="true"][width="full"] {
+  display: flex;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line], svg[data-table] > g > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame], svg[data-table] > g > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed, svg[data-table] > g > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted, svg[data-table] > g > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > g > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"] path[data-c], mjx-container[jax="SVG"] use[data-c] {
+  stroke-width: 3;
+}
+
+g[data-mml-node="xypic"] path {
+  stroke-width: inherit;
+}
+
+.MathJax g[data-mml-node="xypic"] path {
+  stroke-width: inherit;
+}
+
+      }
+      </style>
+      <mjx-container class="MathJax" jax="SVG" style="position: relative;"><svg style="vertical-align: 0;" xmlns="http://www.w3.org/2000/svg" width="2.279ex" height="1.528ex" role="img" focusable="false" viewBox="0 -675.5 1007.3 675.5" aria-hidden="true"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="msup"><g data-mml-node="mn"><path data-c="32" d="M109 429Q82 429 66 447T50 491Q50 562 103 614T235 666Q326 666 387 610T449 465Q449 422 429 383T381 315T301 241Q265 210 201 149L142 93L218 92Q375 92 385 97Q392 99 409 186V189H449V186Q448 183 436 95T421 3V0H50V19V31Q50 38 56 46T86 81Q115 113 136 137Q145 147 170 174T204 211T233 244T261 278T284 308T305 340T320 369T333 401T340 431T343 464Q343 527 309 573T212 619Q179 619 154 602T119 569T109 550Q109 549 114 549Q132 549 151 535T170 489Q170 464 154 447T109 429Z"></path></g><g data-mml-node="mi" transform="translate(533,363) scale(0.707)"><path data-c="1D45B" d="M21 287Q22 293 24 303T36 341T56 388T89 425T135 442Q171 442 195 424T225 390T231 369Q231 367 232 367L243 378Q304 442 382 442Q436 442 469 415T503 336T465 179T427 52Q427 26 444 26Q450 26 453 27Q482 32 505 65T540 145Q542 153 560 153Q580 153 580 145Q580 144 576 130Q568 101 554 73T508 17T439 -10Q392 -10 371 17T350 73Q350 92 386 193T423 345Q423 404 379 404H374Q288 404 229 303L222 291L189 157Q156 26 151 16Q138 -11 108 -11Q95 -11 87 -5T76 7T74 17Q74 30 112 180T152 343Q153 348 153 366Q153 405 129 405Q91 405 66 305Q60 285 60 284Q58 278 41 278H27Q21 284 21 287Z"></path></g></g></g></g></svg><mjx-assistive-mml unselectable="on" display="inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><msup><mn>2</mn><mi>n</mi></msup></math></mjx-assistive-mml></mjx-container>
+    </span>
+  个存储单元。</p>
+<h3 id="数据总线">数据总线</h3>
+<p>数据线宽度越大，传输效率也就越高。对于拥有16宽度数据线的8086CPU，它的传输效率相比于拥有8宽度数据线的8088CPU来说是翻倍的。一个字节有8位，现代CPU的数据线宽度已经达到了64位。而听起来违反直觉的是，USB传输的位宽只有1（串行传输）。虽然从数据上对比，USB的传输效率似乎很慢，但事实上，串行传输的效率远大于并行传输，这得益于它极快的时钟频率。此外，显卡的PCIE槽同样是串行传输的。（好像说太多了？）</p>
+<h3 id="控制总线">控制总线</h3>
+<p>控制总线的宽度决定了CPU能向外部发出多少指令。CPU能发出的命令一般有以下几种：</p>
+<ol>
+<li>读/写控制</li>
+<li>时序控制</li>
+<li>状态与响应</li>
+<li>总线控制（秩序维护）</li>
+</ol>
+<h3 id="存储器芯片">存储器芯片</h3>
+<p>存储器芯片从读写属性上可以分为两类：</p>
+<ul>
+<li>RAM（随机存储器），可读可写，断电擦除。</li>
+<li>ROM（只读存储器），只读不写，断电保存。</li>
+</ul>
+<p>需要注意的是，硬盘（SSD/HDD）并不是ROM，更不是RAM。它独立于计算机外，属于外部存储设备。</p>
+<p>RAM多用于临时存放数据，不管是在CPU，GPU还是在外设的接口卡上。而ROM一般用于保存底层配置（BIOS），匹配其只读不写，断电保留的特性。在CPU的视角下，主内存、显存和存放BIOS的ROM等都是储存器，它们的存储单元都有独一无二的地址。正因如此，基于计算机硬件编程时，搞清楚地址分配空间是很重要的。</p>
+<h1 id="寄存器">寄存器</h1>
+<h2 id="通用寄存器">通用寄存器</h2>
+<p>对于8086架构，其所有寄存器都是16位的。AX、BX、CX、DX四个寄存器用于存放一般数据，被称为通用寄存器。类似的，x86和x64架构中，寄存器数量分别提升到了8个（32bit）和16个（64bit）。它们都可以按位访问，如RAX -&gt; EAX -&gt; AX -&gt; AH/AL</p>
+<h2 id="mov和add">mov和add</h2>
+<p>对于<code>mov ax,18</code>和<code>mov al,18</code>，前者表示把18装进整个ax寄存器，后者表示把18装进ax的低8位。值得注意的是，如果试图执行<code>mov al,256</code>，编译器会报错。如果强制执行，256（二进制<code>100000000</code>）会被截断，只剩下后面的8个0。<code>mov ax,bx</code>表示将bx的数据复制到ax中。汇编代码的顺序好像有点反人类了吧，<strong>数据从右边流向左边。</strong></p>
+<p><code>add ax,8</code>表示将ax的数据加8，<code>add ax,bx</code>代表将ax与bx相加，存在ax中。当输入十六进制数时，要在末尾加H。由于二进制与十六进制之间的特殊转化规则，写十六进制会更加直观一些。但是当十六进制数以字母开头时，不能直接写，要在数前加0（如<code>mov ax,afh</code>是错的，要写<code>mov ax,0afh</code>）</p>
+<h2 id="8086CPU的寻址">8086CPU的寻址</h2>
+<p>8086CPU有20位地址总线，但只有16位结构。为了解决这种冲突，其使用两个16位地址来合成一个20位的地址。但是如果直接将二者简单相加的话，也只有17位。因此，8086CPU将物理地址分为两部分，分别为段地址和偏移地址，之后通过<strong>物理地址=段地址*16+偏移地址</strong>的方法寻址。这里的*16，在二进制下是左移4位，十六进制下是左移1位，即在末尾补0即可。CS寄存器存放段地址，IP寄存器存放偏移地址，二者都不能被<code>mov</code>指令直接修改。</p>
+<p>根据段地址的数学特性和实际情况，段地址和段长度需要满足：</p>
+<ul>
+<li>段地址一定能被16整除</li>
+<li>段长度不能超过64KB（16位CPU下，
+    <span id="mjx-74f7af3">
+      <style>
+      #mjx-74f7af3{
+        display:contents;
+        mjx-assistive-mml {
+          user-select: text !important;
+          clip: auto !important;
+          color: rgba(0,0,0,0);
+        }
+        
+mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+  min-height: 1px;
+  min-width: 1px;
+}
+
+mjx-container[jax="SVG"] > svg a {
+  fill: blue;
+  stroke: blue;
+}
+
+mjx-assistive-mml {
+  position: absolute !important;
+  top: 0px;
+  left: 0px;
+  clip: rect(1px, 1px, 1px, 1px);
+  padding: 1px 0px 0px 0px !important;
+  border: 0px !important;
+  display: block !important;
+  width: auto !important;
+  overflow: hidden !important;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+mjx-assistive-mml[display="block"] {
+  width: 100% !important;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][display="true"][width="full"] {
+  display: flex;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line], svg[data-table] > g > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame], svg[data-table] > g > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed, svg[data-table] > g > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted, svg[data-table] > g > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > g > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"] path[data-c], mjx-container[jax="SVG"] use[data-c] {
+  stroke-width: 3;
+}
+
+g[data-mml-node="xypic"] path {
+  stroke-width: inherit;
+}
+
+.MathJax g[data-mml-node="xypic"] path {
+  stroke-width: inherit;
+}
+
+      }
+      </style>
+      <mjx-container class="MathJax" jax="SVG" style="position: relative;"><svg style="vertical-align: 0;" xmlns="http://www.w3.org/2000/svg" width="2.919ex" height="1.887ex" role="img" focusable="false" viewBox="0 -833.9 1290.1 833.9" aria-hidden="true"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="msup"><g data-mml-node="mn"><path data-c="32" d="M109 429Q82 429 66 447T50 491Q50 562 103 614T235 666Q326 666 387 610T449 465Q449 422 429 383T381 315T301 241Q265 210 201 149L142 93L218 92Q375 92 385 97Q392 99 409 186V189H449V186Q448 183 436 95T421 3V0H50V19V31Q50 38 56 46T86 81Q115 113 136 137Q145 147 170 174T204 211T233 244T261 278T284 308T305 340T320 369T333 401T340 431T343 464Q343 527 309 573T212 619Q179 619 154 602T119 569T109 550Q109 549 114 549Q132 549 151 535T170 489Q170 464 154 447T109 429Z"></path></g><g data-mml-node="TeXAtom" transform="translate(533,363) scale(0.707)" data-mjx-texclass="ORD"><g data-mml-node="mn"><path data-c="31" d="M213 578L200 573Q186 568 160 563T102 556H83V602H102Q149 604 189 617T245 641T273 663Q275 666 285 666Q294 666 302 660V361L303 61Q310 54 315 52T339 48T401 46H427V0H416Q395 3 257 3Q121 3 100 0H88V46H114Q136 46 152 46T177 47T193 50T201 52T207 57T213 61V578Z"></path><path data-c="36" d="M42 313Q42 476 123 571T303 666Q372 666 402 630T432 550Q432 525 418 510T379 495Q356 495 341 509T326 548Q326 592 373 601Q351 623 311 626Q240 626 194 566Q147 500 147 364L148 360Q153 366 156 373Q197 433 263 433H267Q313 433 348 414Q372 400 396 374T435 317Q456 268 456 210V192Q456 169 451 149Q440 90 387 34T253 -22Q225 -22 199 -14T143 16T92 75T56 172T42 313ZM257 397Q227 397 205 380T171 335T154 278T148 216Q148 133 160 97T198 39Q222 21 251 21Q302 21 329 59Q342 77 347 104T352 209Q352 289 347 316T329 361Q302 397 257 397Z" transform="translate(500,0)"></path></g></g></g></g></g></svg><mjx-assistive-mml unselectable="on" display="inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><msup><mn>2</mn><mrow data-mjx-texclass="ORD"><mn>16</mn></mrow></msup></math></mjx-assistive-mml></mjx-container>
+    </span>
+  bit = 64KB）</li>
+</ul>
+<h2 id="8086CPU的命令执行">8086CPU的命令执行</h2>
+<p>从电脑开机，到敲下汇编代码，再到代码被CPU执行，大致经过了以下步骤：</p>
+<ol>
+<li>刚开机内存里什么也没有，8086CPU在通电的一瞬间，硬件电路会将CS:IP强制设置为特定地址，其对应着一块ROM，烧录着BIOS。BIOS运行后，它会去硬盘的引导扇区作引导（如MBR/GPT引导），从而启动操作系统。</li>
+<li>假如只有两条指令，分别是<code>mov ax,1</code>和<code>add ax,1</code>，汇编编译器会把这些代码翻译成机器码，之后打包成可执行文件，存放在硬盘中。当运行这个程序时，操作系统在内存中开辟一块空间，把机器码复制到这片空间里，给出第一条指令的位置。最后，操作系统强行将CS和IP的值修改为第一条程序的起始地址。</li>
+<li>CPU从CS:IP指向的内存单元读取指令，读取的指令进入指令缓冲器。</li>
+<li>自动计算所读取指令的长度，IP移位到下一条指令的位置，指向下一条指令。注意，IP移动是先于指令执行的。这种设计避免了跳转指令（如<code>JZ</code>）导致的地址错乱，也提升了CPU的运行效率。</li>
+<li>执行指令，转到步骤3，重复这个过程。</li>
+</ol>
+<h2 id="修改CS、IP的指令">修改CS、IP的指令</h2>
+<p>前面提到，<code>mov</code>指令不能用来修改CS和IP寄存器。若想修改，可以使用<code>jmp</code>指令。如果想同时修改CS和IP，可用形如<code>jmp 段地址:偏移地址</code>的指令完成。若只想修改IP，可以先给某个通用寄存器（如ax）赋值，再用<code>jmp ax</code>来跳转到指定的地址。但是计算地址太麻烦，这个时候可以使用转向标号的方法：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs assembly">mov ax,0     ; 初始化寄存器ax<br>jmp s        ; 执行jmp后，IP寄存器已经被修改到s指令的地址了<br>add ax,1     ; 这条指令不会被执行<br>s: add ax,2  ; 直接执行这条指令<br></code></pre></td></tr></table></figure>
+<p>为什么<code>jmp s</code>在前，而<code>s: add ax,2</code>在后？这种现象被称为<strong>前向引用</strong>。汇编器在阅读这段代码时，会先选择性忽略s的具体内容。直到读到s代表的指令后，汇编器将地址偏移计算完毕，再在第二遍扫描中把s的偏移填进去，类似于python的<code>new_list = [2*x for x in list]</code>，其中<code>2*x</code>也是对<code>x</code>的前向引用。</p>
+<h2 id="运行汇编程序">运行汇编程序</h2>
+<p>我用的是VSCode的扩展插件<code>MASM/TASM</code>和<code>x86 and x86_64 Assembly</code>。</p>
+<p>让AI写一段hello world：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><code class="hljs assembly">; 告诉编译器将段寄存器和逻辑段关联起来<br>assume cs:code, ds:data<br><br>; 1. 定义数据段<br>data segment<br>    ; 定义字符串，&#x27;$&#x27; 是 DOS 09H 功能的结束符<br>    msg db &#x27;Hello, World!&#x27;, &#x27;$&#x27; <br>data ends<br><br>; 2. 定义代码段<br>code segment<br>start:<br>    ; 初始化 DS 寄存器 (不能直接 MOV DS, data)<br>    mov ax, data<br>    mov ds, ax<br><br>    ; 调用 DOS 中断的 09H 功能：显示字符串<br>    ; 要求：DS:DX 指向字符串首地址<br>    mov dx, offset msg  ; 获取字符串在段内的偏移地址<br>    mov ah, 09h         ; 09h 功能号表示“显示字符串”<br>    int 21h             ; 引发 21h 号中断<br><br>    ; 调用 DOS 中断的 4CH 功能：退出程序<br>    mov ah, 4ch         ; 4ch 功能号表示“返回 DOS”<br>    int 21h<br>code ends<br><br>; 程序结束，并指定入口标号为 start<br>end start<br></code></pre></td></tr></table></figure>
+<p>运行出来是这样的：</p>
+<img src="/2026/04/22/%E6%B1%87%E7%BC%96%E7%9B%B8%E5%85%B3/image-20260427183505975.png" class="" title="image-20260427183505975">
+<p>（真是老东西了）</p>
+</div></article><aside class="post-outline" aria-label="文章目录"><p class="post-outline__eyebrow">本文导航</p><p class="post-outline__title">按标题快速定位</p><nav class="post-toc" data-post-toc><ol class="post-toc__list"><li class="post-toc__list-item post-toc__list-level-1"><a class="post-toc__list-link" href="#%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86"><span class="post-toc__list-text">基础知识</span></a><ol class="post-toc__list-child"><li class="post-toc__list-item post-toc__list-level-2"><a class="post-toc__list-link" href="#%E6%B1%87%E7%BC%96%E7%9A%84%E5%88%86%E7%B1%BB"><span class="post-toc__list-text">汇编的分类</span></a></li><li class="post-toc__list-item post-toc__list-level-2"><a class="post-toc__list-link" href="#%E6%B1%87%E7%BC%96%E7%9A%84%E7%BB%84%E6%88%90"><span class="post-toc__list-text">汇编的组成</span></a></li><li class="post-toc__list-item post-toc__list-level-2"><a class="post-toc__list-link" href="#%E5%AD%98%E5%82%A8%E5%99%A8%E5%92%8C%E5%AD%98%E5%82%A8%E5%8D%95%E5%85%83"><span class="post-toc__list-text">存储器和存储单元</span></a></li><li class="post-toc__list-item post-toc__list-level-2"><a class="post-toc__list-link" href="#CPU%E7%9A%84%E4%BA%A4%E4%BA%92"><span class="post-toc__list-text">CPU的交互</span></a><ol class="post-toc__list-child"><li class="post-toc__list-item post-toc__list-level-3"><a class="post-toc__list-link" href="#%E5%9C%B0%E5%9D%80%E6%80%BB%E7%BA%BF"><span class="post-toc__list-text">地址总线</span></a></li><li class="post-toc__list-item post-toc__list-level-3"><a class="post-toc__list-link" href="#%E6%95%B0%E6%8D%AE%E6%80%BB%E7%BA%BF"><span class="post-toc__list-text">数据总线</span></a></li><li class="post-toc__list-item post-toc__list-level-3"><a class="post-toc__list-link" href="#%E6%8E%A7%E5%88%B6%E6%80%BB%E7%BA%BF"><span class="post-toc__list-text">控制总线</span></a></li><li class="post-toc__list-item post-toc__list-level-3"><a class="post-toc__list-link" href="#%E5%AD%98%E5%82%A8%E5%99%A8%E8%8A%AF%E7%89%87"><span class="post-toc__list-text">存储器芯片</span></a></li></ol></li></ol></li><li class="post-toc__list-item post-toc__list-level-1"><a class="post-toc__list-link" href="#%E5%AF%84%E5%AD%98%E5%99%A8"><span class="post-toc__list-text">寄存器</span></a><ol class="post-toc__list-child"><li class="post-toc__list-item post-toc__list-level-2"><a class="post-toc__list-link" href="#%E9%80%9A%E7%94%A8%E5%AF%84%E5%AD%98%E5%99%A8"><span class="post-toc__list-text">通用寄存器</span></a></li><li class="post-toc__list-item post-toc__list-level-2"><a class="post-toc__list-link" href="#mov%E5%92%8Cadd"><span class="post-toc__list-text">mov和add</span></a></li><li class="post-toc__list-item post-toc__list-level-2"><a class="post-toc__list-link" href="#8086CPU%E7%9A%84%E5%AF%BB%E5%9D%80"><span class="post-toc__list-text">8086CPU的寻址</span></a></li><li class="post-toc__list-item post-toc__list-level-2"><a class="post-toc__list-link" href="#8086CPU%E7%9A%84%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C"><span class="post-toc__list-text">8086CPU的命令执行</span></a></li><li class="post-toc__list-item post-toc__list-level-2"><a class="post-toc__list-link" href="#%E4%BF%AE%E6%94%B9CS%E3%80%81IP%E7%9A%84%E6%8C%87%E4%BB%A4"><span class="post-toc__list-text">修改CS、IP的指令</span></a></li><li class="post-toc__list-item post-toc__list-level-2"><a class="post-toc__list-link" href="#%E8%BF%90%E8%A1%8C%E6%B1%87%E7%BC%96%E7%A8%8B%E5%BA%8F"><span class="post-toc__list-text">运行汇编程序</span></a></li></ol></li></ol></nav></aside></div><nav class="post-nav"><a class="post-nav__item post-nav__item--next" href="/2026/04/20/%E7%A5%9E%E7%A7%98%E9%92%93%E9%B1%BC%E9%A2%98%E4%B8%8E1999/"><span class="post-nav__label">下一篇</span><strong>神秘钓鱼题与1999</strong></a></nav></main><footer class="site-footer"><p class="site-footer__text"></p></footer></div></body></html>
