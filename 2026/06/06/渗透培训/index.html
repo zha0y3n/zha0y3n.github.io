@@ -1,0 +1,137 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="theme-color" content="#496b8c"><meta name="description" content="照烟"><meta name="author" content="照烟"><meta name="generator" content="Hexo 8.1.1"><title>渗透培训 | 照烟</title><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/viewerjs/1.11.6/viewer.min.css"><link rel="stylesheet" href="/css/hsad-theme.css"><script src="https://cdnjs.cloudflare.com/ajax/libs/viewerjs/1.11.6/viewer.min.js"></script><script src="/js/hsad-theme.js" defer></script><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></head><body class="view-inner view-post"><div class="reading-progress" aria-hidden="true"><span class="reading-progress__bar" data-reading-progress></span></div><div class="page-aura page-aura--one"></div><div class="page-aura page-aura--two"></div><div class="site-shell"><aside class="site-sidebar"><section class="sidebar sidebar--desktop"><div class="sidebar__backdrop" style="background-image:url(/images/background.png)"></div><div class="sidebar__overlay"></div><div class="sidebar__content"><a class="sidebar__brand" href="/"><img class="sidebar__avatar" src="/images/avatar.jpg" alt="照烟"><div class="sidebar__identity"><h2 class="sidebar__title">照烟</h2><p class="sidebar__subtitle">zha0y3n</p></div></a><p class="sidebar__description">结局的彼岸，不再空无一人。</p><nav class="sidebar__nav" aria-label="Primary"><a href="/">首页</a><a href="/archives/">归档</a><a href="/categories/">分类</a><a href="/tags/">标签</a><a href="/links/">友链</a><a href="/about/">关于</a></nav><div class="sidebar__social"><a href="https://github.com/zha0y3n" target="_blank" rel="noopener">GitHub</a><a href="mailto:3509864228@qq.com" target="_blank" rel="noopener">E-Mail</a></div></div></section></aside><div class="mobile-topbar"><button class="mobile-topbar__toggle js-drawer-toggle" type="button" aria-label="Open navigation"><span></span><span></span><span></span></button><a class="mobile-topbar__title" href="/">照烟</a><a class="mobile-topbar__avatar" href="/"><img src="/images/avatar.jpg" alt="照烟"></a></div><div class="mobile-drawer" data-drawer aria-hidden="true"><div class="mobile-drawer__panel"><section class="sidebar sidebar--mobile"><div class="sidebar__backdrop" style="background-image:url(/images/background.png)"></div><div class="sidebar__overlay"></div><div class="sidebar__content"><a class="sidebar__brand" href="/"><img class="sidebar__avatar" src="/images/avatar.jpg" alt="照烟"><div class="sidebar__identity"><h2 class="sidebar__title">照烟</h2><p class="sidebar__subtitle">zha0y3n</p></div></a><p class="sidebar__description">结局的彼岸，不再空无一人。</p><nav class="sidebar__nav" aria-label="Primary"><a href="/">首页</a><a href="/archives/">归档</a><a href="/categories/">分类</a><a href="/tags/">标签</a><a href="/links/">友链</a><a href="/about/">关于</a></nav><div class="sidebar__social"><a href="https://github.com/zha0y3n" target="_blank" rel="noopener">GitHub</a><a href="mailto:3509864228@qq.com" target="_blank" rel="noopener">E-Mail</a></div></div></section></div></div><div class="mobile-backdrop js-drawer-close"></div><main class="site-main"><div class="article-layout article-layout--with-toc"><article class="article"><header class="article__header"><div class="article__eyebrow"><a href="/categories/%E7%AC%94%E8%AE%B0/">笔记</a></div><h1 class="article__title">渗透培训</h1><div class="article__meta"><time datetime="2026-06-06T01:08:15.000Z">2026-06-06</time><span class="article__divider">/</span><span>更新于 2026-06-07</span></div><div class="article__tags"><a class="article__tag" href="/tags/Web/">Web</a></div></header><div class="article__content"><h1 id="Domain-域">Domain(域)</h1>
+<h2 id="域是什么">域是什么</h2>
+<img src="/2026/06/06/%E6%B8%97%E9%80%8F%E5%9F%B9%E8%AE%AD/image-20260606100622454.png" class="" title="image-20260606100622454">
+<h2 id="判断是否存在域-确认域信息">判断是否存在域-确认域信息</h2>
+<img src="/2026/06/06/%E6%B8%97%E9%80%8F%E5%9F%B9%E8%AE%AD/image-20260606100732956.png" class="" title="image-20260606100732956">
+<h2 id="域内渗透">域内渗透</h2>
+<img src="/2026/06/06/%E6%B8%97%E9%80%8F%E5%9F%B9%E8%AE%AD/image-20260606101132722.png" class="" title="image-20260606101132722">
+<img src="/2026/06/06/%E6%B8%97%E9%80%8F%E5%9F%B9%E8%AE%AD/image-20260606101119258.png" class="" title="image-20260606101119258">
+<img src="/2026/06/06/%E6%B8%97%E9%80%8F%E5%9F%B9%E8%AE%AD/image-20260606101123453.png" class="" title="image-20260606101123453">
+<h2 id="域与非域渗透的区别">域与非域渗透的区别</h2>
+<img src="/2026/06/06/%E6%B8%97%E9%80%8F%E5%9F%B9%E8%AE%AD/image-20260606100906449.png" class="" title="image-20260606100906449">
+<h2 id="域、DNS和工作组的核心区别">域、DNS和工作组的核心区别</h2>
+<p>个人电脑运行在工作组模式下</p>
+<h2 id="域用户、域管与组">域用户、域管与组</h2>
+<p>域用户不等于本地用户</p>
+<p>组是横向移动的跳板</p>
+<p>域管凭据有分散风险（域管登录普通主机后，凭据会留在该用户的内存中，增其高被攻击风险）</p>
+<h2 id="AD域的核心架构和组件">AD域的核心架构和组件</h2>
+<h2 id="域林和域树-AD架构">域林和域树-AD架构</h2>
+<img src="/2026/06/06/%E6%B8%97%E9%80%8F%E5%9F%B9%E8%AE%AD/image-20260606094302394.png" class="" title="image-20260606094302394">
+<h2 id="域认证">域认证</h2>
+<h3 id="NTLM-密码认证方式">NTLM-密码认证方式</h3>
+<h3 id="Kerberos-票据认证方式">Kerberos-票据认证方式</h3>
+<h4 id="TGT-身份证明">TGT-身份证明</h4>
+<p>PAC</p>
+<h5 id="Golden-Ticket">Golden Ticket</h5>
+<p><strong>蓝队防御票据攻击</strong></p>
+<img src="/2026/06/06/%E6%B8%97%E9%80%8F%E5%9F%B9%E8%AE%AD/image-20260606103055999.png" class="" title="image-20260606103055999">
+<h5 id="Silver-Ticket">Silver Ticket</h5>
+<img src="/2026/06/06/%E6%B8%97%E9%80%8F%E5%9F%B9%E8%AE%AD/image-20260606103147963.png" class="" title="image-20260606103147963">
+<h5 id="影子凭据">影子凭据</h5>
+<img src="/2026/06/06/%E6%B8%97%E9%80%8F%E5%9F%B9%E8%AE%AD/image-20260606104451760.png" class="" title="image-20260606104451760">
+<h4 id="TGS-访问票据">TGS-访问票据</h4>
+<h4 id="SPN-身份标识">SPN-身份标识</h4>
+<img src="/2026/06/06/%E6%B8%97%E9%80%8F%E5%9F%B9%E8%AE%AD/image-20260606100027674.png" class="" title="image-20260606100027674">
+<p><strong>SPN与红队攻击</strong></p>
+<img src="/2026/06/06/%E6%B8%97%E9%80%8F%E5%9F%B9%E8%AE%AD/image-20260606100531014.png" class="" title="image-20260606100531014">
+<p><strong>SPN枚举与蓝队防御</strong></p>
+<img src="/2026/06/06/%E6%B8%97%E9%80%8F%E5%9F%B9%E8%AE%AD/image-20260606100333027.png" class="" title="image-20260606100333027">
+<h4 id="Kerberos扮演的核心角色">Kerberos扮演的核心角色</h4>
+<h4 id="票据烘焙攻击-Kerberoasting">票据烘焙攻击(Kerberoasting)</h4>
+<img src="/2026/06/06/%E6%B8%97%E9%80%8F%E5%9F%B9%E8%AE%AD/image-20260606100215033.png" class="" title="image-20260606100215033">
+<h4 id="AS-REP-Roasting攻击">AS-REP Roasting攻击</h4>
+<img src="/2026/06/06/%E6%B8%97%E9%80%8F%E5%9F%B9%E8%AE%AD/image-20260606103245376.png" class="" title="image-20260606103245376">
+<h4 id="Kerberos和NTLM对比">Kerberos和NTLM对比</h4>
+<h3 id="认证流程">认证流程</h3>
+<p>拿TGT</p>
+<img src="/2026/06/06/%E6%B8%97%E9%80%8F%E5%9F%B9%E8%AE%AD/image-20260606095312807.png" class="" title="image-20260606095312807">
+<h2 id="域内横向移动">域内横向移动</h2>
+<h3 id="IPC">IPC</h3>
+<img src="/2026/06/06/%E6%B8%97%E9%80%8F%E5%9F%B9%E8%AE%AD/image-20260606102017725.png" class="" title="image-20260606102017725">
+<h3 id="哈希传递攻击">哈希传递攻击</h3>
+<p>Mimikatz</p>
+<p><strong>Impacket套件</strong></p>
+<img src="/2026/06/06/%E6%B8%97%E9%80%8F%E5%9F%B9%E8%AE%AD/image-20260606102315243.png" class="" title="image-20260606102315243">
+<p>⬆Exec系列</p>
+<h3 id="PasstheKey-PasstheTicket-攻击">PasstheKey / PasstheTicket 攻击</h3>
+<img src="/2026/06/06/%E6%B8%97%E9%80%8F%E5%9F%B9%E8%AE%AD/image-20260606102821425.png" class="" title="image-20260606102821425">
+<h3 id="redTeam-Tools">redTeam Tools</h3>
+<img src="/2026/06/06/%E6%B8%97%E9%80%8F%E5%9F%B9%E8%AE%AD/image-20260606103403135.png" class="" title="image-20260606103403135">
+<h2 id="域渗透实战">域渗透实战</h2>
+<img src="/2026/06/06/%E6%B8%97%E9%80%8F%E5%9F%B9%E8%AE%AD/image-20260606103603147.png" class="" title="image-20260606103603147">
+<h3 id="委派攻击">委派攻击</h3>
+<p>非约束委派攻击：访问不受限，需要域管参与，可以访问任意地方</p>
+<p>约束委派攻击：访问受限，不需要域管参与，只能访问核心仓库</p>
+<p>基于资源的约束委派攻击(RBCD)</p>
+<h3 id="DCSync攻击">DCSync攻击</h3>
+<img src="/2026/06/06/%E6%B8%97%E9%80%8F%E5%9F%B9%E8%AE%AD/image-20260606104649456.png" class="" title="image-20260606104649456">
+<h3 id="导出域内Hash">导出域内Hash</h3>
+<img src="/2026/06/06/%E6%B8%97%E9%80%8F%E5%9F%B9%E8%AE%AD/image-20260606104954307.png" class="" title="image-20260606104954307">
+<h3 id="SID-History攻击">SID History攻击</h3>
+<h3 id="AdminSDHolder后门">AdminSDHolder后门</h3>
+<img src="/2026/06/06/%E6%B8%97%E9%80%8F%E5%9F%B9%E8%AE%AD/image-20260606110514861.png" class="" title="image-20260606110514861">
+<h3 id="Skeleton-Key万能密码">Skeleton Key万能密码</h3>
+<img src="/2026/06/06/%E6%B8%97%E9%80%8F%E5%9F%B9%E8%AE%AD/image-20260606110612655.png" class="" title="image-20260606110612655">
+<h3 id="经典域提权漏洞">经典域提权漏洞</h3>
+<img src="/2026/06/06/%E6%B8%97%E9%80%8F%E5%9F%B9%E8%AE%AD/image-20260606110906389.png" class="" title="image-20260606110906389">
+<img src="/2026/06/06/%E6%B8%97%E9%80%8F%E5%9F%B9%E8%AE%AD/image-20260606110954434.png" class="" title="image-20260606110954434">
+<h3 id="攻击链">攻击链</h3>
+<img src="/2026/06/06/%E6%B8%97%E9%80%8F%E5%9F%B9%E8%AE%AD/image-20260606111118966.png" class="" title="image-20260606111118966">
+<p><strong>获取域控后</strong></p>
+<img src="/2026/06/06/%E6%B8%97%E9%80%8F%E5%9F%B9%E8%AE%AD/image-20260606111306520.png" class="" title="image-20260606111306520">
+<h1 id="内网渗透">内网渗透</h1>
+<img src="/2026/06/06/%E6%B8%97%E9%80%8F%E5%9F%B9%E8%AE%AD/image-20260606143348546.png" class="" title="image-20260606143348546">
+<p>获取边界权限 ➡ 权限维持和提升</p>
+<h2 id="重点收集的信息列表">重点收集的信息列表</h2>
+<img src="/2026/06/06/%E6%B8%97%E9%80%8F%E5%9F%B9%E8%AE%AD/image-20260606143634698.png" class="" title="image-20260606143634698">
+<p><strong>Linux &amp; Windows</strong></p>
+<img src="/2026/06/06/%E6%B8%97%E9%80%8F%E5%9F%B9%E8%AE%AD/image-20260606143752869.png" class="" title="image-20260606143752869">
+<h2 id="文件传输方式">文件传输方式</h2>
+<img src="/2026/06/06/%E6%B8%97%E9%80%8F%E5%9F%B9%E8%AE%AD/image-20260606144651367.png" class="" title="image-20260606144651367">
+<h2 id="常见的利用端口">常见的利用端口</h2>
+<img src="/2026/06/06/%E6%B8%97%E9%80%8F%E5%9F%B9%E8%AE%AD/image-20260606144842325.png" class="" title="image-20260606144842325">
+<h2 id="命令执行路径">命令执行路径</h2>
+<img src="/2026/06/06/%E6%B8%97%E9%80%8F%E5%9F%B9%E8%AE%AD/image-20260606150802374.png" class="" title="image-20260606150802374">
+<h2 id="Linked-Server扩大影响">Linked Server扩大影响</h2>
+<h2 id="自动化工具与脚本">自动化工具与脚本</h2>
+<img src="/2026/06/06/%E6%B8%97%E9%80%8F%E5%9F%B9%E8%AE%AD/image-20260606152832593.png" class="" title="image-20260606152832593">
+<h2 id="祛痕">祛痕</h2>
+<img src="/2026/06/06/%E6%B8%97%E9%80%8F%E5%9F%B9%E8%AE%AD/image-20260606153316474.png" class="" title="image-20260606153316474">
+<h2 id="敏感信息获取">敏感信息获取</h2>
+<img src="/2026/06/06/%E6%B8%97%E9%80%8F%E5%9F%B9%E8%AE%AD/image-20260606154040907.png" class="" title="image-20260606154040907">
+<h2 id="双网卡与路由利用">双网卡与路由利用</h2>
+<h1 id="权限维持">权限维持</h1>
+<h2 id="计划任务">计划任务</h2>
+<p>schtasks</p>
+<p>屏保程序</p>
+<h2 id="自启动">自启动</h2>
+<img src="/2026/06/06/%E6%B8%97%E9%80%8F%E5%9F%B9%E8%AE%AD/image-20260607091008682.png" class="" title="image-20260607091008682">
+<h2 id="开后门">开后门</h2>
+<img src="/2026/06/06/%E6%B8%97%E9%80%8F%E5%9F%B9%E8%AE%AD/image-20260607091414529.png" class="" title="image-20260607091414529">
+<h2 id="进程隐藏">进程隐藏</h2>
+<img src="/2026/06/06/%E6%B8%97%E9%80%8F%E5%9F%B9%E8%AE%AD/image-20260607092246852.png" class="" title="image-20260607092246852">
+<h2 id="进程注入">进程注入</h2>
+<img src="/2026/06/06/%E6%B8%97%E9%80%8F%E5%9F%B9%E8%AE%AD/image-20260607093312784.png" class="" title="image-20260607093312784">
+<h3 id="注册表利用类">注册表利用类</h3>
+<h3 id="组件劫持类">组件劫持类</h3>
+<h3 id="文件与服务替换类">文件与服务替换类</h3>
+<h1 id="代理">代理</h1>
+<p>进入内网后，将攻击流量转发到内网其它网段的关键技术</p>
+<p>作用：</p>
+<img src="/2026/06/06/%E6%B8%97%E9%80%8F%E5%9F%B9%E8%AE%AD/image-20260607110424198.png" class="" title="image-20260607110424198">
+<h2 id="Tunnel技术">Tunnel技术</h2>
+<h2 id="Socks5代理协议">Socks5代理协议</h2>
+<img src="/2026/06/06/%E6%B8%97%E9%80%8F%E5%9F%B9%E8%AE%AD/image-20260607111525113.png" class="" title="image-20260607111525113">
+<img src="/2026/06/06/%E6%B8%97%E9%80%8F%E5%9F%B9%E8%AE%AD/image-20260607112109803.png" class="" title="image-20260607112109803">
+<h2 id="内网流量转发">内网流量转发</h2>
+<img src="/2026/06/06/%E6%B8%97%E9%80%8F%E5%9F%B9%E8%AE%AD/image-20260607113348558.png" class="" title="image-20260607113348558">
+<h1 id="边界突破">边界突破</h1>
+<h2 id="信息收集">信息收集</h2>
+<ul>
+<li>系统与框架</li>
+<li>域名与网络</li>
+<li>人员与账户</li>
+</ul>
+<img src="/2026/06/06/%E6%B8%97%E9%80%8F%E5%9F%B9%E8%AE%AD/image-20260607143733526.png" class="" title="image-20260607143733526">
+</div></article><aside class="post-outline" aria-label="文章目录"><p class="post-outline__eyebrow">本文导航</p><p class="post-outline__title">按标题快速定位</p><nav class="post-toc" data-post-toc><ol class="post-toc__list"><li class="post-toc__list-item post-toc__list-level-1"><a class="post-toc__list-link" href="#Domain-%E5%9F%9F"><span class="post-toc__list-text">Domain(域)</span></a><ol class="post-toc__list-child"><li class="post-toc__list-item post-toc__list-level-2"><a class="post-toc__list-link" href="#%E5%9F%9F%E6%98%AF%E4%BB%80%E4%B9%88"><span class="post-toc__list-text">域是什么</span></a></li><li class="post-toc__list-item post-toc__list-level-2"><a class="post-toc__list-link" href="#%E5%88%A4%E6%96%AD%E6%98%AF%E5%90%A6%E5%AD%98%E5%9C%A8%E5%9F%9F-%E7%A1%AE%E8%AE%A4%E5%9F%9F%E4%BF%A1%E6%81%AF"><span class="post-toc__list-text">判断是否存在域-确认域信息</span></a></li><li class="post-toc__list-item post-toc__list-level-2"><a class="post-toc__list-link" href="#%E5%9F%9F%E5%86%85%E6%B8%97%E9%80%8F"><span class="post-toc__list-text">域内渗透</span></a></li><li class="post-toc__list-item post-toc__list-level-2"><a class="post-toc__list-link" href="#%E5%9F%9F%E4%B8%8E%E9%9D%9E%E5%9F%9F%E6%B8%97%E9%80%8F%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="post-toc__list-text">域与非域渗透的区别</span></a></li><li class="post-toc__list-item post-toc__list-level-2"><a class="post-toc__list-link" href="#%E5%9F%9F%E3%80%81DNS%E5%92%8C%E5%B7%A5%E4%BD%9C%E7%BB%84%E7%9A%84%E6%A0%B8%E5%BF%83%E5%8C%BA%E5%88%AB"><span class="post-toc__list-text">域、DNS和工作组的核心区别</span></a></li><li class="post-toc__list-item post-toc__list-level-2"><a class="post-toc__list-link" href="#%E5%9F%9F%E7%94%A8%E6%88%B7%E3%80%81%E5%9F%9F%E7%AE%A1%E4%B8%8E%E7%BB%84"><span class="post-toc__list-text">域用户、域管与组</span></a></li><li class="post-toc__list-item post-toc__list-level-2"><a class="post-toc__list-link" href="#AD%E5%9F%9F%E7%9A%84%E6%A0%B8%E5%BF%83%E6%9E%B6%E6%9E%84%E5%92%8C%E7%BB%84%E4%BB%B6"><span class="post-toc__list-text">AD域的核心架构和组件</span></a></li><li class="post-toc__list-item post-toc__list-level-2"><a class="post-toc__list-link" href="#%E5%9F%9F%E6%9E%97%E5%92%8C%E5%9F%9F%E6%A0%91-AD%E6%9E%B6%E6%9E%84"><span class="post-toc__list-text">域林和域树-AD架构</span></a></li><li class="post-toc__list-item post-toc__list-level-2"><a class="post-toc__list-link" href="#%E5%9F%9F%E8%AE%A4%E8%AF%81"><span class="post-toc__list-text">域认证</span></a><ol class="post-toc__list-child"><li class="post-toc__list-item post-toc__list-level-3"><a class="post-toc__list-link" href="#NTLM-%E5%AF%86%E7%A0%81%E8%AE%A4%E8%AF%81%E6%96%B9%E5%BC%8F"><span class="post-toc__list-text">NTLM-密码认证方式</span></a></li><li class="post-toc__list-item post-toc__list-level-3"><a class="post-toc__list-link" href="#Kerberos-%E7%A5%A8%E6%8D%AE%E8%AE%A4%E8%AF%81%E6%96%B9%E5%BC%8F"><span class="post-toc__list-text">Kerberos-票据认证方式</span></a></li><li class="post-toc__list-item post-toc__list-level-3"><a class="post-toc__list-link" href="#%E8%AE%A4%E8%AF%81%E6%B5%81%E7%A8%8B"><span class="post-toc__list-text">认证流程</span></a></li></ol></li><li class="post-toc__list-item post-toc__list-level-2"><a class="post-toc__list-link" href="#%E5%9F%9F%E5%86%85%E6%A8%AA%E5%90%91%E7%A7%BB%E5%8A%A8"><span class="post-toc__list-text">域内横向移动</span></a><ol class="post-toc__list-child"><li class="post-toc__list-item post-toc__list-level-3"><a class="post-toc__list-link" href="#IPC"><span class="post-toc__list-text">IPC</span></a></li><li class="post-toc__list-item post-toc__list-level-3"><a class="post-toc__list-link" href="#%E5%93%88%E5%B8%8C%E4%BC%A0%E9%80%92%E6%94%BB%E5%87%BB"><span class="post-toc__list-text">哈希传递攻击</span></a></li><li class="post-toc__list-item post-toc__list-level-3"><a class="post-toc__list-link" href="#PasstheKey-PasstheTicket-%E6%94%BB%E5%87%BB"><span class="post-toc__list-text">PasstheKey &#x2F; PasstheTicket 攻击</span></a></li><li class="post-toc__list-item post-toc__list-level-3"><a class="post-toc__list-link" href="#redTeam-Tools"><span class="post-toc__list-text">redTeam Tools</span></a></li></ol></li><li class="post-toc__list-item post-toc__list-level-2"><a class="post-toc__list-link" href="#%E5%9F%9F%E6%B8%97%E9%80%8F%E5%AE%9E%E6%88%98"><span class="post-toc__list-text">域渗透实战</span></a><ol class="post-toc__list-child"><li class="post-toc__list-item post-toc__list-level-3"><a class="post-toc__list-link" href="#%E5%A7%94%E6%B4%BE%E6%94%BB%E5%87%BB"><span class="post-toc__list-text">委派攻击</span></a></li><li class="post-toc__list-item post-toc__list-level-3"><a class="post-toc__list-link" href="#DCSync%E6%94%BB%E5%87%BB"><span class="post-toc__list-text">DCSync攻击</span></a></li><li class="post-toc__list-item post-toc__list-level-3"><a class="post-toc__list-link" href="#%E5%AF%BC%E5%87%BA%E5%9F%9F%E5%86%85Hash"><span class="post-toc__list-text">导出域内Hash</span></a></li><li class="post-toc__list-item post-toc__list-level-3"><a class="post-toc__list-link" href="#SID-History%E6%94%BB%E5%87%BB"><span class="post-toc__list-text">SID History攻击</span></a></li><li class="post-toc__list-item post-toc__list-level-3"><a class="post-toc__list-link" href="#AdminSDHolder%E5%90%8E%E9%97%A8"><span class="post-toc__list-text">AdminSDHolder后门</span></a></li><li class="post-toc__list-item post-toc__list-level-3"><a class="post-toc__list-link" href="#Skeleton-Key%E4%B8%87%E8%83%BD%E5%AF%86%E7%A0%81"><span class="post-toc__list-text">Skeleton Key万能密码</span></a></li><li class="post-toc__list-item post-toc__list-level-3"><a class="post-toc__list-link" href="#%E7%BB%8F%E5%85%B8%E5%9F%9F%E6%8F%90%E6%9D%83%E6%BC%8F%E6%B4%9E"><span class="post-toc__list-text">经典域提权漏洞</span></a></li><li class="post-toc__list-item post-toc__list-level-3"><a class="post-toc__list-link" href="#%E6%94%BB%E5%87%BB%E9%93%BE"><span class="post-toc__list-text">攻击链</span></a></li></ol></li></ol></li><li class="post-toc__list-item post-toc__list-level-1"><a class="post-toc__list-link" href="#%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F"><span class="post-toc__list-text">内网渗透</span></a><ol class="post-toc__list-child"><li class="post-toc__list-item post-toc__list-level-2"><a class="post-toc__list-link" href="#%E9%87%8D%E7%82%B9%E6%94%B6%E9%9B%86%E7%9A%84%E4%BF%A1%E6%81%AF%E5%88%97%E8%A1%A8"><span class="post-toc__list-text">重点收集的信息列表</span></a></li><li class="post-toc__list-item post-toc__list-level-2"><a class="post-toc__list-link" href="#%E6%96%87%E4%BB%B6%E4%BC%A0%E8%BE%93%E6%96%B9%E5%BC%8F"><span class="post-toc__list-text">文件传输方式</span></a></li><li class="post-toc__list-item post-toc__list-level-2"><a class="post-toc__list-link" href="#%E5%B8%B8%E8%A7%81%E7%9A%84%E5%88%A9%E7%94%A8%E7%AB%AF%E5%8F%A3"><span class="post-toc__list-text">常见的利用端口</span></a></li><li class="post-toc__list-item post-toc__list-level-2"><a class="post-toc__list-link" href="#%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C%E8%B7%AF%E5%BE%84"><span class="post-toc__list-text">命令执行路径</span></a></li><li class="post-toc__list-item post-toc__list-level-2"><a class="post-toc__list-link" href="#Linked-Server%E6%89%A9%E5%A4%A7%E5%BD%B1%E5%93%8D"><span class="post-toc__list-text">Linked Server扩大影响</span></a></li><li class="post-toc__list-item post-toc__list-level-2"><a class="post-toc__list-link" href="#%E8%87%AA%E5%8A%A8%E5%8C%96%E5%B7%A5%E5%85%B7%E4%B8%8E%E8%84%9A%E6%9C%AC"><span class="post-toc__list-text">自动化工具与脚本</span></a></li><li class="post-toc__list-item post-toc__list-level-2"><a class="post-toc__list-link" href="#%E7%A5%9B%E7%97%95"><span class="post-toc__list-text">祛痕</span></a></li><li class="post-toc__list-item post-toc__list-level-2"><a class="post-toc__list-link" href="#%E6%95%8F%E6%84%9F%E4%BF%A1%E6%81%AF%E8%8E%B7%E5%8F%96"><span class="post-toc__list-text">敏感信息获取</span></a></li><li class="post-toc__list-item post-toc__list-level-2"><a class="post-toc__list-link" href="#%E5%8F%8C%E7%BD%91%E5%8D%A1%E4%B8%8E%E8%B7%AF%E7%94%B1%E5%88%A9%E7%94%A8"><span class="post-toc__list-text">双网卡与路由利用</span></a></li></ol></li><li class="post-toc__list-item post-toc__list-level-1"><a class="post-toc__list-link" href="#%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81"><span class="post-toc__list-text">权限维持</span></a><ol class="post-toc__list-child"><li class="post-toc__list-item post-toc__list-level-2"><a class="post-toc__list-link" href="#%E8%AE%A1%E5%88%92%E4%BB%BB%E5%8A%A1"><span class="post-toc__list-text">计划任务</span></a></li><li class="post-toc__list-item post-toc__list-level-2"><a class="post-toc__list-link" href="#%E8%87%AA%E5%90%AF%E5%8A%A8"><span class="post-toc__list-text">自启动</span></a></li><li class="post-toc__list-item post-toc__list-level-2"><a class="post-toc__list-link" href="#%E5%BC%80%E5%90%8E%E9%97%A8"><span class="post-toc__list-text">开后门</span></a></li><li class="post-toc__list-item post-toc__list-level-2"><a class="post-toc__list-link" href="#%E8%BF%9B%E7%A8%8B%E9%9A%90%E8%97%8F"><span class="post-toc__list-text">进程隐藏</span></a></li><li class="post-toc__list-item post-toc__list-level-2"><a class="post-toc__list-link" href="#%E8%BF%9B%E7%A8%8B%E6%B3%A8%E5%85%A5"><span class="post-toc__list-text">进程注入</span></a><ol class="post-toc__list-child"><li class="post-toc__list-item post-toc__list-level-3"><a class="post-toc__list-link" href="#%E6%B3%A8%E5%86%8C%E8%A1%A8%E5%88%A9%E7%94%A8%E7%B1%BB"><span class="post-toc__list-text">注册表利用类</span></a></li><li class="post-toc__list-item post-toc__list-level-3"><a class="post-toc__list-link" href="#%E7%BB%84%E4%BB%B6%E5%8A%AB%E6%8C%81%E7%B1%BB"><span class="post-toc__list-text">组件劫持类</span></a></li><li class="post-toc__list-item post-toc__list-level-3"><a class="post-toc__list-link" href="#%E6%96%87%E4%BB%B6%E4%B8%8E%E6%9C%8D%E5%8A%A1%E6%9B%BF%E6%8D%A2%E7%B1%BB"><span class="post-toc__list-text">文件与服务替换类</span></a></li></ol></li></ol></li><li class="post-toc__list-item post-toc__list-level-1"><a class="post-toc__list-link" href="#%E4%BB%A3%E7%90%86"><span class="post-toc__list-text">代理</span></a><ol class="post-toc__list-child"><li class="post-toc__list-item post-toc__list-level-2"><a class="post-toc__list-link" href="#Tunnel%E6%8A%80%E6%9C%AF"><span class="post-toc__list-text">Tunnel技术</span></a></li><li class="post-toc__list-item post-toc__list-level-2"><a class="post-toc__list-link" href="#Socks5%E4%BB%A3%E7%90%86%E5%8D%8F%E8%AE%AE"><span class="post-toc__list-text">Socks5代理协议</span></a></li><li class="post-toc__list-item post-toc__list-level-2"><a class="post-toc__list-link" href="#%E5%86%85%E7%BD%91%E6%B5%81%E9%87%8F%E8%BD%AC%E5%8F%91"><span class="post-toc__list-text">内网流量转发</span></a></li></ol></li><li class="post-toc__list-item post-toc__list-level-1"><a class="post-toc__list-link" href="#%E8%BE%B9%E7%95%8C%E7%AA%81%E7%A0%B4"><span class="post-toc__list-text">边界突破</span></a><ol class="post-toc__list-child"><li class="post-toc__list-item post-toc__list-level-2"><a class="post-toc__list-link" href="#%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86"><span class="post-toc__list-text">信息收集</span></a></li></ol></li></ol></nav></aside></div><nav class="post-nav"><a class="post-nav__item post-nav__item--next" href="/2026/05/31/DASCTF-2026/"><span class="post-nav__label">下一篇</span><strong>DASCTF-2026</strong></a></nav></main><footer class="site-footer"><div class="busuanzi-count" style="position: fixed; right: 20px; bottom: 20px; z-index: 999; font-size: 0.9em; color: #888;"><span id="busuanzi_container_site_uv">本站总访客数<span id="busuanzi_value_site_uv"></span> 人次</span><span style="margin: 0 8px;">|</span><span id="busuanzi_container_site_pv">本站总访问量<span id="busuanzi_value_site_pv"></span> 次</span></div><p class="site-footer__text"></p></footer></div></body></html>
