@@ -1,0 +1,344 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="theme-color" content="#496b8c"><meta name="description" content="照烟"><meta name="author" content="照烟"><meta name="generator" content="Hexo 8.1.1"><title>密码学环境配置 | 照烟</title><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/viewerjs/1.11.6/viewer.min.css"><link rel="stylesheet" href="/css/hsad-theme.css"><script src="https://cdnjs.cloudflare.com/ajax/libs/viewerjs/1.11.6/viewer.min.js"></script><script src="/js/hsad-theme.js" defer></script><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></head><body class="view-inner view-post"><div class="reading-progress" aria-hidden="true"><span class="reading-progress__bar" data-reading-progress></span></div><div class="page-aura page-aura--one"></div><div class="page-aura page-aura--two"></div><div class="site-shell"><aside class="site-sidebar"><section class="sidebar sidebar--desktop"><div class="sidebar__backdrop" style="background-image:url(/images/background.png)"></div><div class="sidebar__overlay"></div><div class="sidebar__content"><a class="sidebar__brand" href="/"><img class="sidebar__avatar" src="/images/avatar.jpg" alt="照烟"><div class="sidebar__identity"><h2 class="sidebar__title">照烟</h2><p class="sidebar__subtitle">zha0y3n</p></div></a><p class="sidebar__description">结局的彼岸，不再空无一人。</p><nav class="sidebar__nav" aria-label="Primary"><a href="/">首页</a><a href="/archives/">归档</a><a href="/categories/">分类</a><a href="/tags/">标签</a><a href="/links/">友链</a><a href="/about/">关于</a></nav><div class="sidebar__social"><a href="https://github.com/zha0y3n" target="_blank" rel="noopener">GitHub</a><a href="mailto:3509864228@qq.com" target="_blank" rel="noopener">E-Mail</a></div></div></section></aside><div class="mobile-topbar"><button class="mobile-topbar__toggle js-drawer-toggle" type="button" aria-label="Open navigation"><span></span><span></span><span></span></button><a class="mobile-topbar__title" href="/">照烟</a><a class="mobile-topbar__avatar" href="/"><img src="/images/avatar.jpg" alt="照烟"></a></div><div class="mobile-drawer" data-drawer aria-hidden="true"><div class="mobile-drawer__panel"><section class="sidebar sidebar--mobile"><div class="sidebar__backdrop" style="background-image:url(/images/background.png)"></div><div class="sidebar__overlay"></div><div class="sidebar__content"><a class="sidebar__brand" href="/"><img class="sidebar__avatar" src="/images/avatar.jpg" alt="照烟"><div class="sidebar__identity"><h2 class="sidebar__title">照烟</h2><p class="sidebar__subtitle">zha0y3n</p></div></a><p class="sidebar__description">结局的彼岸，不再空无一人。</p><nav class="sidebar__nav" aria-label="Primary"><a href="/">首页</a><a href="/archives/">归档</a><a href="/categories/">分类</a><a href="/tags/">标签</a><a href="/links/">友链</a><a href="/about/">关于</a></nav><div class="sidebar__social"><a href="https://github.com/zha0y3n" target="_blank" rel="noopener">GitHub</a><a href="mailto:3509864228@qq.com" target="_blank" rel="noopener">E-Mail</a></div></div></section></div></div><div class="mobile-backdrop js-drawer-close"></div><main class="site-main"><div class="article-layout article-layout--with-toc"><article class="article"><header class="article__header"><div class="article__eyebrow"><a href="/categories/%E7%AC%94%E8%AE%B0/">笔记</a></div><h1 class="article__title">密码学环境配置</h1><div class="article__meta"><time datetime="2026-08-22T14:43:05.000Z">2026-08-22</time><span class="article__divider">/</span><span>更新于 2026-08-23</span></div><div class="article__tags"><a class="article__tag" href="/tags/Crypto/">Crypto</a></div></header><div class="article__content"><h1 id="安装-WSL">安装 WSL</h1>
+<h2 id="什么是-WSL">什么是 WSL</h2>
+<p>WSL 是 Windows Subsystem for Linux 的缩写，即“适用于 Linux 的 Windows 子系统”。它让你能在 Windows 上直接运行 Linux 命令行、工具和程序，无需安装虚拟机或双系统。WSL2 使用真实 Linux 内核，性能和兼容性更好。</p>
+<h2 id="为什么要安装-WSL">为什么要安装 WSL</h2>
+<p>主要还是因为 sagemath 撤销了对 Windows 的支持。另外以后如果跑 agent 的话，在 Windows 环境下 powershell 命令容易被写坏，agent 对 Linux 命令的支持度更高。再者，想学 Linux 命令、测试部署环境，或使用 Docker、Git 等工具时，WSL 是很方便的选择。</p>
+<h2 id="使用命令行安装">使用命令行安装</h2>
+<p>在安装之前，先查看可用的发行版：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">wsl --list --online<br></code></pre></td></tr></table></figure>
+<p>版本有很多。这里为了适配主流 Linux 操作命令，我们安装最新版的 Ubuntu-26.04：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">wsl --install -d Ubuntu-26.04<br></code></pre></td></tr></table></figure>
+<p>安装成功后，会提示让我们创建默认账户。这个账户是 <strong>普通的非管理员用户账户</strong>，但具备执行 <code>sudo</code> 的权限。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">正在下载: Ubuntu 26.04 LTS<br>正在安装: Ubuntu 26.04 LTS<br>已成功安装分发。可以通过 “wsl.exe -d Ubuntu-26.04” 启动它<br>正在启动 Ubuntu-26.04...<br>Provisioning the new WSL instance Ubuntu-26.04<br>This might take a while...<br>Create a default Unix user account:<br></code></pre></td></tr></table></figure>
+<p>用户名按自己喜欢的来就好，但首字母不能大写。之后如果改名字可能会导致一堆莫名其妙的报错，所以尽量现在想好用户名，以后不要改动。</p>
+<p>之后会提示输入密码。因为个人电脑没什么安全风险，所以可以先设一个弱密码，等会再配置使用 <code>sudo</code> 命令时无需输入密码，达到类似无密码的效果。</p>
+<p>后面的匿名系统数据收集计划输入 <code>y</code> 同意就好，至此我们就成功进入 Ubuntu 系统，还是非常简单的。</p>
+<h2 id="Linux-基础配置">Linux 基础配置</h2>
+<p>之后我们就可以通过 powershell 的扩展框进入 Linux 终端：</p>
+<img src="/2026/08/22/%E5%AF%86%E7%A0%81%E5%AD%A6%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/image-20260822132059876.png" class="" title="image-20260822132059876">
+<p>初次进入，可能会有点不习惯终端的配色风格和光标。这些可以在上图扩展框的设置中调整，进入后如下图所示。可以更换图标，也能把光标从方块更改为细线式，更改终端背景颜色（或把背景换为图片），字体大小及样式等。我个人喜欢 Campbell 的配色方案，Cascadia Code 字体，竖线光标。当然，因人而异嘛。</p>
+<img src="/2026/08/22/%E5%AF%86%E7%A0%81%E5%AD%A6%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202026-08-22%20132249.png" class="" title="屏幕截图 2026-08-22 132249">
+<p>配置好后，前缀大概类似 <code>cheyanne@LAPTOP-GRNTPI58:~$</code></p>
+<p>如果觉得这个主机名看着很别扭，可以自己更改。先编辑第一份配置文件：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">sudo nano /etc/wsl.conf<br></code></pre></td></tr></table></figure>
+<p>在 nano 中写入以下内容（<code>wslname</code> 换成自己喜欢的名字）</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">[network]<br>hostname = wslname<br>generateHosts = false<br></code></pre></td></tr></table></figure>
+<p>写入后按顺序按 <code>ctrl+O</code>，<code>enter</code>，<code>ctrl+X</code> 保存并退出。接着编辑第二份配置文件：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">sudo nano /etc/hosts<br></code></pre></td></tr></table></figure>
+<p>把其中带有你的主机名的部分全部替换为你自己起的主机名，同样按 <code>ctrl+O</code>，<code>enter</code>，<code>ctrl+X</code> 保存并退出。</p>
+<p>改完后在 <strong>Windows powershell 中</strong> 执行 <code>wsl --shutdown</code>，再次进入终端就修改成功了。</p>
+<p>类似 <code>cheyanne@ubuntu:~$</code></p>
+<p>需要知道的是，每个 Linux 用户都被分配了一个家目录（用 <code>~</code> 表示，根目录用 <code>/</code> 表示）。平常写脚本改代码时尽量在家目录里活动，不要到根目录里随便改文件，容易改崩。等到安装的程序多了，家目录容易变得很乱。我个人推荐在家目录下新建一个文件夹，平常在那里敲代码。文件夹名字假设为 <code>main</code>，新建文件夹：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">mkdir ~/main<br></code></pre></td></tr></table></figure>
+<p>设置启动终端时默认目录为 <code>~/main</code>（而非原本的直接进入 <code>~</code>）：</p>
+<p>编辑 <code>~/.bashrc</code>：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">nano ~/.bashrc<br></code></pre></td></tr></table></figure>
+<p>末尾新增一行：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">cd ~/main<br></code></pre></td></tr></table></figure>
+<p>保存并退出后使更改生效：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">source ~/.bashrc<br></code></pre></td></tr></table></figure>
+<p>这样以后进入终端的默认目录就是 <code>~/main</code> 了。</p>
+<p>需要的话，配置 <code>sudo</code> 命令无需密码：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">sudo su<br>visudo<br></code></pre></td></tr></table></figure>
+<p>在末尾加上这段（<code>username</code> 换成自己的）：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">username ALL=(ALL:ALL) NOPASSWD: ALL<br></code></pre></td></tr></table></figure>
+<p><strong>对于 Ubuntu-26.06</strong>，使用以下命令更换下载源（其它版本不要用这个）：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">sudo sed -i &#x27;s|http://archive.ubuntu.com/ubuntu|https://mirrors.aliyun.com/ubuntu|g; s|http://security.ubuntu.com/ubuntu|https://mirrors.aliyun.com/ubuntu|g&#x27; /etc/apt/sources.list.d/ubuntu.sources<br></code></pre></td></tr></table></figure>
+<p>再更新软件源（换源后下载速度应该快很多）：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">sudo apt update<br>sudo apt upgrade -y<br>sudo apt install -y build-essential git curl wget unzip zip ca-certificates gdb file patchelf<br></code></pre></td></tr></table></figure>
+<p>还有一些基础的 Linux 命令（比如 <code>cd</code>，<code>ls</code>）和快捷键（比如 <code>ctrl+L</code> 清空终端，<code>ctrl+A</code> 将光标移动到输入框开头等）需要大家自己学习，这里就不再赘述了。</p>
+<h1 id="安装-conda-及-sagemath">安装 conda 及 sagemath</h1>
+<h2 id="什么是-conda">什么是 conda</h2>
+<p>Conda 是一个开源的包管理和环境管理工具，主要用于安装和管理软件包及其依赖。它能自动处理依赖关系，让安装、更新和卸载更加方便，同时还可以为不同项目创建独立的运行环境，有效避免库版本冲突。</p>
+<h2 id="安装-conda">安装 conda</h2>
+<p>安装过程中一路 yes 或者回车就好，这里安装的是 Miniforge3：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">wget https://mirrors.ustc.edu.cn/github-release/conda-forge/miniforge/LatestRelease/Miniforge3-Linux-x86_64.sh<br>bash Miniforge3-Linux-x86_64.sh<br></code></pre></td></tr></table></figure>
+<p>完成之后执行：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">rm Miniforge3-Linux-x86_64.sh<br>source ~/.bashrc<br></code></pre></td></tr></table></figure>
+<p>安装成功之后前缀会有一个 <code>(base)</code> 标记。配置：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">conda config --set channel_priority strict<br>conda config --set solver libmamba<br>conda config --show channels<br></code></pre></td></tr></table></figure>
+<h2 id="安装-sagemath">安装 sagemath</h2>
+<p>用 <code>mamba</code> 创建 sage 环境：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">mamba create -y -n sage sage<br></code></pre></td></tr></table></figure>
+<p>验证能否进入 sage 环境：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">conda activate sage<br></code></pre></td></tr></table></figure>
+<p>如果能看到 <code>(sage)</code> 前缀，那么恭喜你，最难的任务已经完成了 🥰</p>
+<p>真实使用时，我们不需要激活环境，直接指名道姓使用就可以。先退出 sage 环境：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">conda deactivate<br></code></pre></td></tr></table></figure>
+<p>如果退到了 base 环境，再执行一次上面的命令就行。</p>
+<p>关闭自动启动 base：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">conda config --set auto_activate_base false<br></code></pre></td></tr></table></figure>
+<p>测试能否通过绝对路径使用 sagemath：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">~/miniforge3/envs/sage/bin/sage<br></code></pre></td></tr></table></figure>
+<p>界面是这样的：</p>
+<img src="/2026/08/22/%E5%AF%86%E7%A0%81%E5%AD%A6%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/image-20260822143530501.png" class="" title="image-20260822143530501">
+<p>可以测试一些简单的命令，验证能不能正常使用：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">print(&quot;Hello, Hnusec!&quot;)<br>1 + 1<br>factor(91) # 91的质因数分解<br>quit() # 退出交互<br></code></pre></td></tr></table></figure>
+<p>每次都得输绝对路径太麻烦了，我们在配置中设置 <code>sage</code> 命令对路径 <code>~/miniforge3/envs/sage/bin/sage</code> 的映射（虽然一般不直接在这个交互界面使用 sage）：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">mkdir -p ~/.local/bin<br>ln -s ~/miniforge3/envs/sage/bin/sage ~/.local/bin/sage<br>echo &#x27;export PATH=&quot;$HOME/.local/bin:$PATH&quot;&#x27; &gt;&gt; ~/.bashrc<br>source ~/.bashrc<br></code></pre></td></tr></table></figure>
+<p>这样以后直接输入 <code>sage</code> 就可以进交互终端，不用输绝对路径了。</p>
+<img src="/2026/08/22/%E5%AF%86%E7%A0%81%E5%AD%A6%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/image-20260822150034631.png" class="" title="image-20260822150034631">
+<h2 id="安装第三方模块">安装第三方模块</h2>
+<p>如果一切正常，现在 Ubuntu 里应该有三个 python 环境：系统 python、conda-base 的 python，以及 sagemath 内置的 python。</p>
+<p>切记不要在终端里直接 <code>pip install ...</code>，此时操作的是系统 python，会报错如下。不要动系统 python。</p>
+<img src="/2026/08/22/%E5%AF%86%E7%A0%81%E5%AD%A6%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/image-20260822152758902.png" class="" title="image-20260822152758902">
+<p>conda-base 的 python 虽然可以用，但是没什么必要（毕竟写一般的 python 脚本都在 Win 里，且 sage 的 python 完全可以承担它的功能），所以我们安装第三方模块都是在 sage 的 python 里。</p>
+<p>使用以下命令在 sage 的 python 安装第三方模块：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">~/miniforge3/bin/mamba run -n sage pip install 包名<br></code></pre></td></tr></table></figure>
+<p>下面的命令一般不使用。优先用上面的 pip 安装：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">~/miniforge3/bin/mamba install -n sage 包名<br></code></pre></td></tr></table></figure>
+<p>举个例子。在没安装 <code>pycryptodome</code> 库之前，直接导入会报错：</p>
+<img src="/2026/08/22/%E5%AF%86%E7%A0%81%E5%AD%A6%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/image-20260822153434982.png" class="" title="image-20260822153434982">
+<p>使用命令安装：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">~/miniforge3/bin/mamba run -n sage pip install pycryptodome<br></code></pre></td></tr></table></figure>
+<p>之后就可以正常使用库函数：</p>
+<img src="/2026/08/22/%E5%AF%86%E7%A0%81%E5%AD%A6%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/image-20260822153638455.png" class="" title="image-20260822153638455">
+<h1 id="配置-VSCode-及其扩展">配置 VSCode 及其扩展</h1>
+<p>首先确保你的 Win 系统中已经有 VSCode。在 Win 的 VSCode 中下载 WSL 扩展：</p>
+<img src="/2026/08/22/%E5%AF%86%E7%A0%81%E5%AD%A6%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/image-20260822154154668.png" class="" title="image-20260822154154668">
+<p>安装好后在 Ubuntu 终端中输入：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">code .<br></code></pre></td></tr></table></figure>
+<p>后面的 <code>.</code> 代表把当前目录设为工作区，当然也可以打开别的目录。</p>
+<p>除了在 Ubuntu 终端中打开 VSCode，也可以在 Win 的 VSCode 中打开 Ubuntu 的 VSCode，如图：</p>
+<img src="/2026/08/22/%E5%AF%86%E7%A0%81%E5%AD%A6%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/image-20260823100106679.png" class="" title="image-20260823100106679">
+<p>如果你的 VSCode 设置了窗口缩放，启动 WSL 后缩放就没有了，可以在 Win 中 VSCode 的 <code>settings.json</code> 末尾新增 <code>&quot;window.zoomLevel&quot;: 1,</code> 以锁定窗口缩放。</p>
+<p>对于密码方向来说，WSL 的 VSCode 主要是用来写 python 和 sage 的，扩展不用装太多。推荐这些：</p>
+<ul>
+<li>Python 全家桶（Python、Pylance、Black Formatter 等等）</li>
+<li>SageMath Enhanced（对于 sage 脚本生效，简单的语法高亮补全和一键运行）</li>
+<li>Jupyter（虽然我没怎么用过）</li>
+</ul>
+<p>安装好扩展后可以按 <code>ctrl+shift+P</code> 重加载窗口。关于 VSCode 的快捷键也有非常多，用好了会很方便。</p>
+<p>再次按 <code>ctrl+shift+P</code> 选择 Python 解释器为 sage，如图：</p>
+<img src="/2026/08/22/%E5%AF%86%E7%A0%81%E5%AD%A6%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/image-20260822205152301.png" class="" title="image-20260822205152301">
+<h2 id="语法差异">语法差异</h2>
+<p>如果题目刚需 sage 环境（比如涉及到 coppersmith、ECC 以及格密码时），只依靠交互环境是很费劲的，这个时候就需要编写 sage 脚本解题。但是目前 <code>.sage</code> 没有成熟的代码补全和高亮。虽然 python 能导入 sage 库（<code>from sage.all import *</code>），能够享受 lsp，但是语法却有许多限制。对比一下 sage 写法和 python 写法的差异：</p>
+<ol>
+<li>
+<p>对于精确有理数（如 
+    <span id="mjx-19a89418">
+      <style>
+      #mjx-19a89418{
+        display:contents;
+        mjx-assistive-mml {
+          user-select: text !important;
+          clip: auto !important;
+          color: rgba(0,0,0,0);
+        }
+        
+mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+  min-height: 1px;
+  min-width: 1px;
+}
+
+mjx-container[jax="SVG"] > svg a {
+  fill: blue;
+  stroke: blue;
+}
+
+mjx-assistive-mml {
+  position: absolute !important;
+  top: 0px;
+  left: 0px;
+  clip: rect(1px, 1px, 1px, 1px);
+  padding: 1px 0px 0px 0px !important;
+  border: 0px !important;
+  display: block !important;
+  width: auto !important;
+  overflow: hidden !important;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+mjx-assistive-mml[display="block"] {
+  width: 100% !important;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][display="true"][width="full"] {
+  display: flex;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line], svg[data-table] > g > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame], svg[data-table] > g > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed, svg[data-table] > g > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted, svg[data-table] > g > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > g > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"] path[data-c], mjx-container[jax="SVG"] use[data-c] {
+  stroke-width: 3;
+}
+
+g[data-mml-node="xypic"] path {
+  stroke-width: inherit;
+}
+
+.MathJax g[data-mml-node="xypic"] path {
+  stroke-width: inherit;
+}
+
+      }
+      </style>
+      <mjx-container class="MathJax" jax="SVG" style="position: relative;"><svg style="vertical-align: -0.816ex;" xmlns="http://www.w3.org/2000/svg" width="1.795ex" height="2.773ex" role="img" focusable="false" viewBox="0 -864.9 793.6 1225.5" aria-hidden="true"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mfrac"><g data-mml-node="mn" transform="translate(220,394) scale(0.707)"><path data-c="31" d="M213 578L200 573Q186 568 160 563T102 556H83V602H102Q149 604 189 617T245 641T273 663Q275 666 285 666Q294 666 302 660V361L303 61Q310 54 315 52T339 48T401 46H427V0H416Q395 3 257 3Q121 3 100 0H88V46H114Q136 46 152 46T177 47T193 50T201 52T207 57T213 61V578Z"></path></g><g data-mml-node="mn" transform="translate(220,-345) scale(0.707)"><path data-c="33" d="M127 463Q100 463 85 480T69 524Q69 579 117 622T233 665Q268 665 277 664Q351 652 390 611T430 522Q430 470 396 421T302 350L299 348Q299 347 308 345T337 336T375 315Q457 262 457 175Q457 96 395 37T238 -22Q158 -22 100 21T42 130Q42 158 60 175T105 193Q133 193 151 175T169 130Q169 119 166 110T159 94T148 82T136 74T126 70T118 67L114 66Q165 21 238 21Q293 21 321 74Q338 107 338 175V195Q338 290 274 322Q259 328 213 329L171 330L168 332Q166 335 166 348Q166 366 174 366Q202 366 232 371Q266 376 294 413T322 525V533Q322 590 287 612Q265 626 240 626Q208 626 181 615T143 592T132 580H135Q138 579 143 578T153 573T165 566T175 555T183 540T186 520Q186 498 172 481T127 463Z"></path></g><rect width="553.6" height="60" x="120" y="220"></rect></g></g></g></svg><mjx-assistive-mml unselectable="on" display="inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mfrac><mn>1</mn><mn>3</mn></mfrac></math></mjx-assistive-mml></mjx-container>
+    </span>
+  ）：sage 写 <code>a = 1/3</code> 能精确保留，python 需要额外写成 <code>a = QQ(1)/3</code></p>
+</li>
+<li>
+<p>幂运算：sage 用 <code>^</code>（异或是 <code>^^</code>），python 用 <code>**</code>（异或是 <code>^</code>）</p>
+</li>
+<li>
+<p>单变量多项式环：<code>R.&lt;x&gt; = QQ[]</code>，python中取生成元是<code>x = QQ[&quot;x&quot;].gen()</code>，取环是<code>R = QQ[&quot;x&quot;]</code>。二者都要的话要写成两句：<code>R = QQ[&quot;x&quot;]; x = R.gen()</code></p>
+<p>类比所有带 <code>.&lt;x&gt;</code> 形式的语法，python 都不能直接用（如多变量多项式环，商环，数域等等）</p>
+</li>
+<li>
+<p>连续步长的列表：<code>[1..5]</code>，这个语法糖的意味太重了，python 是 <code>list(range(1, 5+1))</code></p>
+</li>
+</ol>
+<p>大概就只有这么多，其它的 sage 语法在 python 编辑器里不会报错，可以照常写。</p>
+<p>直接写 <code>.sage</code> 脚本可以享受更便捷的语法，但是失去了高亮和补全。写 <code>.py</code> （这里指调用 sage 库函数的脚本）正好相反，语法复杂一些，但是体验更好。</p>
+<h2 id="修改扩展（可选）">修改扩展（可选）</h2>
+<p>SageMath Enhanced 扩展有些地方用着不是很顺手：</p>
+<ol>
+<li>当你试图按住 <code>ctrl</code> 以查看类 / 方法的定义时（其实更可能是按快捷键时鼠标不小心移到了上面），扩展会报错 <code>Request textDocument/definition failed.</code>，且这个报错不能静默。</li>
+<li>写矩阵时如果分行写会报警告（原因是原扩展只维护了同一行的括号栈），<code>Unmatched parentheses on line x</code></li>
+<li>点击右上角的 <code>Run SageMath File</code> 小箭头后文件不会自动保存，只按照旧脚本运行。</li>
+<li>（可选的优化）保存时若代码末尾无空行，则新增一个空行并将光标移动到该空行上。</li>
+</ol>
+<p>接下来的扩展修复均基于目录 <code>~/.vscode-server/extensions/lov3.sagemath-enhanced-2.0.8</code>，一定在修复之前备份原扩展。</p>
+<p>每次修改后记得使用 <code>ctrl+shift+P</code> 重载窗口以使修改生效。</p>
+<h3 id="语言服务器请求错误">语言服务器请求错误</h3>
+<p><strong>文件：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">out/server/src/server.js<br></code></pre></td></tr></table></figure>
+<p>在 <code>out/server/src/server.js:113</code>，服务端声明支持 <code>textDocument/definition</code>，但文件中没有注册 <code>connection.onDefinition(...)</code>。Ctrl+悬停触发定义请求时，服务端返回“方法未实现”，于是 VSCode 显示 <code>Request textDocument/definition failed.</code></p>
+<p>直接删除该能力声明。这样 VSCode 不再向此语言服务器发送定义请求，错误消失。</p>
+<h3 id="多行矩阵误报-Unmatched-parentheses-on-line-x">多行矩阵误报 <code>Unmatched parentheses on line x</code></h3>
+<p><strong>文件：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">out/server/src/server.js<br></code></pre></td></tr></table></figure>
+<p><strong>修改前</strong></p>
+<p>在 <code>documents.onDidChangeContent(...)</code> 后面直接进入 <code>validateTextDocument</code>，并在 <code>validateTextDocument</code> 的循环里逐行数括号。原逻辑大致在 <code>validateTextDocument</code> 内：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">const</span> diagnostics = [];<br><span class="hljs-comment">// Basic syntax checking for SageMath</span><br><span class="hljs-keyword">const</span> lines = text.<span class="hljs-title function_">split</span>(<span class="hljs-string">&#x27;\n&#x27;</span>);<br><span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i &lt; lines.<span class="hljs-property">length</span>; i++) &#123;<br>    <span class="hljs-keyword">const</span> line = lines[i];<br>    <span class="hljs-comment">// Check for common SageMath syntax issues</span><br>    <span class="hljs-comment">// Check for unmatched parentheses, brackets, braces</span><br>    <span class="hljs-keyword">const</span> openParens = (line.<span class="hljs-title function_">match</span>(<span class="hljs-regexp">/\(/g</span>) || []).<span class="hljs-property">length</span>;<br>    <span class="hljs-keyword">const</span> closeParens = (line.<span class="hljs-title function_">match</span>(<span class="hljs-regexp">/\)/g</span>) || []).<span class="hljs-property">length</span>;<br>    <span class="hljs-keyword">if</span> (openParens !== closeParens) &#123;<br>        <span class="hljs-keyword">const</span> diagnostic = &#123;<br>            <span class="hljs-attr">severity</span>: node_1.<span class="hljs-property">DiagnosticSeverity</span>.<span class="hljs-property">Warning</span>,<br>            <span class="hljs-attr">range</span>: &#123;<br>                <span class="hljs-attr">start</span>: &#123; <span class="hljs-attr">line</span>: i, <span class="hljs-attr">character</span>: <span class="hljs-number">0</span> &#125;,<br>                <span class="hljs-attr">end</span>: &#123; <span class="hljs-attr">line</span>: i, <span class="hljs-attr">character</span>: line.<span class="hljs-property">length</span> &#125;<br>            &#125;,<br>            <span class="hljs-attr">message</span>: <span class="hljs-string">`Unmatched parentheses on line <span class="hljs-subst">$&#123;i + <span class="hljs-number">1</span>&#125;</span>`</span>,<br>            <span class="hljs-attr">source</span>: <span class="hljs-string">&#x27;sagemath-enhanced&#x27;</span><br>        &#125;;<br>        diagnostics.<span class="hljs-title function_">push</span>(diagnostic);<br>    &#125;<br>    <span class="hljs-comment">// Check for undefined variables that might be typos</span><br></code></pre></td></tr></table></figure>
+<p><strong>修改后</strong></p>
+<p>在 <code>documents.onDidChangeContent(...)</code> 和 <code>async function validateTextDocument(...)</code> 之间新增以下函数和常量。位置约为 <code>out/server/src/server.js:187</code>：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">const</span> <span class="hljs-variable constant_">OPENING_DELIMITERS</span> = &#123;<br>    <span class="hljs-string">&#x27;(&#x27;</span>: <span class="hljs-string">&#x27;)&#x27;</span>,<br>    <span class="hljs-string">&#x27;[&#x27;</span>: <span class="hljs-string">&#x27;]&#x27;</span>,<br>    <span class="hljs-string">&#x27;&#123;&#x27;</span>: <span class="hljs-string">&#x27;&#125;&#x27;</span><br>&#125;;<br><span class="hljs-keyword">const</span> <span class="hljs-variable constant_">CLOSING_DELIMITERS</span> = &#123;<br>    <span class="hljs-string">&#x27;)&#x27;</span>: <span class="hljs-string">&#x27;(&#x27;</span>,<br>    <span class="hljs-string">&#x27;]&#x27;</span>: <span class="hljs-string">&#x27;[&#x27;</span>,<br>    <span class="hljs-string">&#x27;&#125;&#x27;</span>: <span class="hljs-string">&#x27;&#123;&#x27;</span><br>&#125;;<br><span class="hljs-keyword">function</span> <span class="hljs-title function_">createDelimiterDiagnostic</span>(<span class="hljs-params">line, character, lineLength, message</span>) &#123;<br>    <span class="hljs-keyword">return</span> &#123;<br>        <span class="hljs-attr">severity</span>: node_1.<span class="hljs-property">DiagnosticSeverity</span>.<span class="hljs-property">Warning</span>,<br>        <span class="hljs-attr">range</span>: &#123;<br>            <span class="hljs-attr">start</span>: &#123; line, character &#125;,<br>            <span class="hljs-attr">end</span>: &#123; line, <span class="hljs-attr">character</span>: <span class="hljs-title class_">Math</span>.<span class="hljs-title function_">min</span>(character + <span class="hljs-number">1</span>, <span class="hljs-title class_">Math</span>.<span class="hljs-title function_">max</span>(lineLength, character + <span class="hljs-number">1</span>)) &#125;<br>        &#125;,<br>        message,<br>        <span class="hljs-attr">source</span>: <span class="hljs-string">&#x27;sagemath-enhanced&#x27;</span><br>    &#125;;<br>&#125;<br><span class="hljs-keyword">function</span> <span class="hljs-title function_">collectDelimiterDiagnostics</span>(<span class="hljs-params">lines</span>) &#123;<br>    <span class="hljs-keyword">const</span> diagnostics = [];<br>    <span class="hljs-keyword">const</span> stack = [];<br>    <span class="hljs-keyword">let</span> stringState = <span class="hljs-literal">undefined</span>;<br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> lineNumber = <span class="hljs-number">0</span>; lineNumber &lt; lines.<span class="hljs-property">length</span>; lineNumber++) &#123;<br>        <span class="hljs-keyword">const</span> line = lines[lineNumber];<br>        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> character = <span class="hljs-number">0</span>; character &lt; line.<span class="hljs-property">length</span>; character++) &#123;<br>            <span class="hljs-keyword">const</span> char = line[character];<br>            <span class="hljs-keyword">if</span> (stringState) &#123;<br>                <span class="hljs-keyword">if</span> (stringState.<span class="hljs-property">escaped</span>) &#123;<br>                    stringState.<span class="hljs-property">escaped</span> = <span class="hljs-literal">false</span>;<br>                    <span class="hljs-keyword">continue</span>;<br>                &#125;<br>                <span class="hljs-keyword">if</span> (char === <span class="hljs-string">&#x27;\\&#x27;</span>) &#123;<br>                    stringState.<span class="hljs-property">escaped</span> = <span class="hljs-literal">true</span>;<br>                    <span class="hljs-keyword">continue</span>;<br>                &#125;<br>                <span class="hljs-keyword">if</span> (stringState.<span class="hljs-property">triple</span>) &#123;<br>                    <span class="hljs-keyword">if</span> (line.<span class="hljs-title function_">startsWith</span>(stringState.<span class="hljs-property">quote</span>.<span class="hljs-title function_">repeat</span>(<span class="hljs-number">3</span>), character)) &#123;<br>                        character += <span class="hljs-number">2</span>;<br>                        stringState = <span class="hljs-literal">undefined</span>;<br>                    &#125;<br>                &#125;<br>                <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (char === stringState.<span class="hljs-property">quote</span>) &#123;<br>                    stringState = <span class="hljs-literal">undefined</span>;<br>                &#125;<br>                <span class="hljs-keyword">continue</span>;<br>            &#125;<br>            <span class="hljs-keyword">if</span> (char === <span class="hljs-string">&#x27;#&#x27;</span>) &#123;<br>                <span class="hljs-keyword">break</span>;<br>            &#125;<br>            <span class="hljs-keyword">if</span> (char === <span class="hljs-string">&#x27;&quot;&#x27;</span> || char === <span class="hljs-string">&quot;&#x27;&quot;</span>) &#123;<br>                <span class="hljs-keyword">const</span> triple = line.<span class="hljs-title function_">startsWith</span>(char.<span class="hljs-title function_">repeat</span>(<span class="hljs-number">3</span>), character);<br>                stringState = &#123; <span class="hljs-attr">quote</span>: char, triple, <span class="hljs-attr">escaped</span>: <span class="hljs-literal">false</span> &#125;;<br>                <span class="hljs-keyword">if</span> (triple) &#123;<br>                    character += <span class="hljs-number">2</span>;<br>                &#125;<br>                <span class="hljs-keyword">continue</span>;<br>            &#125;<br>            <span class="hljs-keyword">if</span> (<span class="hljs-variable constant_">OPENING_DELIMITERS</span>[char]) &#123;<br>                stack.<span class="hljs-title function_">push</span>(&#123; char, <span class="hljs-attr">line</span>: lineNumber, character &#125;);<br>                <span class="hljs-keyword">continue</span>;<br>            &#125;<br>            <span class="hljs-keyword">if</span> (<span class="hljs-variable constant_">CLOSING_DELIMITERS</span>[char]) &#123;<br>                <span class="hljs-keyword">const</span> opener = stack[stack.<span class="hljs-property">length</span> - <span class="hljs-number">1</span>];<br>                <span class="hljs-keyword">if</span> (opener &amp;&amp; opener.<span class="hljs-property">char</span> === <span class="hljs-variable constant_">CLOSING_DELIMITERS</span>[char]) &#123;<br>                    stack.<span class="hljs-title function_">pop</span>();<br>                    <span class="hljs-keyword">continue</span>;<br>                &#125;<br>                diagnostics.<span class="hljs-title function_">push</span>(<span class="hljs-title function_">createDelimiterDiagnostic</span>(lineNumber, character, line.<span class="hljs-property">length</span>, <span class="hljs-string">`Unmatched closing delimiter &#x27;<span class="hljs-subst">$&#123;char&#125;</span>&#x27; on line <span class="hljs-subst">$&#123;lineNumber + <span class="hljs-number">1</span>&#125;</span>`</span>));<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">if</span> (stringState &amp;&amp; !stringState.<span class="hljs-property">triple</span>) &#123;<br>            stringState = <span class="hljs-literal">undefined</span>;<br>        &#125;<br>    &#125;<br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">const</span> opener <span class="hljs-keyword">of</span> stack) &#123;<br>        diagnostics.<span class="hljs-title function_">push</span>(<span class="hljs-title function_">createDelimiterDiagnostic</span>(opener.<span class="hljs-property">line</span>, opener.<span class="hljs-property">character</span>, lines[opener.<span class="hljs-property">line</span>].<span class="hljs-property">length</span>, <span class="hljs-string">`Unmatched opening delimiter &#x27;<span class="hljs-subst">$&#123;opener.char&#125;</span>&#x27; on line <span class="hljs-subst">$&#123;opener.line + <span class="hljs-number">1</span>&#125;</span>; expected &#x27;<span class="hljs-subst">$&#123;OPENING_DELIMITERS[opener.char]&#125;</span>&#x27;`</span>));<br>    &#125;<br>    <span class="hljs-keyword">return</span> diagnostics;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>然后把 <code>validateTextDocument</code> 开头的括号诊断逻辑改成调用新函数。位置约为 <code>out/server/src/server.js:274</code>：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">const</span> diagnostics = [];<br><span class="hljs-comment">// Basic syntax checking for SageMath</span><br><span class="hljs-keyword">const</span> lines = text.<span class="hljs-title function_">split</span>(<span class="hljs-string">&#x27;\n&#x27;</span>);<br>diagnostics.<span class="hljs-title function_">push</span>(...<span class="hljs-title function_">collectDelimiterDiagnostics</span>(lines));<br><span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i &lt; lines.<span class="hljs-property">length</span>; i++) &#123;<br>    <span class="hljs-keyword">const</span> line = lines[i];<br>    <span class="hljs-comment">// Check for undefined variables that might be typos</span><br></code></pre></td></tr></table></figure>
+<p>也就是删除原来的逐行 <code>openParens/closeParens</code> 统计块。</p>
+<h3 id="点击-Run-SageMath-File-前自动保存">点击 <code>Run SageMath File</code> 前自动保存</h3>
+<p><strong>文件：</strong></p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs text">out/src/extension.js<br></code></pre></td></tr></table></figure>
+<p><strong>修改前</strong></p>
+<p>当前命令回调原来是同步函数，且校验 Sage 文件后直接读取磁盘路径运行。原逻辑大致在 <code>out/src/extension.js:34</code>：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">const</span> runDisposable = vscode.<span class="hljs-property">commands</span>.<span class="hljs-title function_">registerCommand</span>(<span class="hljs-string">&#x27;runsagemathfile.run&#x27;</span>, <span class="hljs-function">() =&gt;</span> &#123;<br>    <span class="hljs-keyword">const</span> editor = vscode.<span class="hljs-property">window</span>.<span class="hljs-property">activeTextEditor</span>;<br>    <span class="hljs-keyword">if</span> (!editor) &#123;<br>        <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;No editor is active&#x27;</span>);<br>        <span class="hljs-keyword">return</span>;<br>    &#125;<br>    <span class="hljs-keyword">const</span> <span class="hljs-variable language_">document</span> = editor.<span class="hljs-property">document</span>;<br>    <span class="hljs-keyword">if</span> (<span class="hljs-variable language_">document</span>.<span class="hljs-property">languageId</span> !== <span class="hljs-string">&#x27;sage&#x27;</span>) &#123;<br>        vscode.<span class="hljs-property">window</span>.<span class="hljs-title function_">showInformationMessage</span>(<span class="hljs-string">&#x27;The active file is not a SageMath file&#x27;</span>);<br>        <span class="hljs-keyword">return</span>;<br>    &#125;<br>    <span class="hljs-keyword">const</span> sagePath = vscode.<span class="hljs-property">workspace</span>.<span class="hljs-title function_">getConfiguration</span>().<span class="hljs-title function_">get</span>(<span class="hljs-string">&#x27;sagemathEnhanced.interpreterPath&#x27;</span>);<br></code></pre></td></tr></table></figure>
+<p><strong>修改后</strong></p>
+<p>把回调改成 <code>async</code>，并在读取 <code>sagePath</code> 前保存脏文档。修改后位置约为 <code>out/src/extension.js:63</code>：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">const</span> runDisposable = vscode.<span class="hljs-property">commands</span>.<span class="hljs-title function_">registerCommand</span>(<span class="hljs-string">&#x27;runsagemathfile.run&#x27;</span>, <span class="hljs-title function_">async</span> () =&gt; &#123;<br>    <span class="hljs-keyword">const</span> editor = vscode.<span class="hljs-property">window</span>.<span class="hljs-property">activeTextEditor</span>;<br>    <span class="hljs-keyword">if</span> (!editor) &#123;<br>        <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;No editor is active&#x27;</span>);<br>        <span class="hljs-keyword">return</span>;<br>    &#125;<br>    <span class="hljs-keyword">const</span> <span class="hljs-variable language_">document</span> = editor.<span class="hljs-property">document</span>;<br>    <span class="hljs-keyword">if</span> (<span class="hljs-variable language_">document</span>.<span class="hljs-property">languageId</span> !== <span class="hljs-string">&#x27;sage&#x27;</span>) &#123;<br>        vscode.<span class="hljs-property">window</span>.<span class="hljs-title function_">showInformationMessage</span>(<span class="hljs-string">&#x27;The active file is not a SageMath file&#x27;</span>);<br>        <span class="hljs-keyword">return</span>;<br>    &#125;<br>    <span class="hljs-keyword">if</span> (<span class="hljs-variable language_">document</span>.<span class="hljs-property">isDirty</span>) &#123;<br>        <span class="hljs-keyword">const</span> saved = <span class="hljs-keyword">await</span> <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">save</span>();<br>        <span class="hljs-keyword">if</span> (!saved) &#123;<br>            vscode.<span class="hljs-property">window</span>.<span class="hljs-title function_">showErrorMessage</span>(<span class="hljs-string">&#x27;SageMath file was not saved. Run cancelled.&#x27;</span>);<br>            <span class="hljs-keyword">return</span>;<br>        &#125;<br>    &#125;<br>    <span class="hljs-keyword">const</span> sagePath = vscode.<span class="hljs-property">workspace</span>.<span class="hljs-title function_">getConfiguration</span>().<span class="hljs-title function_">get</span>(<span class="hljs-string">&#x27;sagemathEnhanced.interpreterPath&#x27;</span>);<br></code></pre></td></tr></table></figure>
+<p>后续构造终端命令的代码保持不变。</p>
+<h3 id="保存时补末尾空行并移动光标">保存时补末尾空行并移动光标</h3>
+<p><strong>文件：</strong></p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs text">out/src/extension.js<br></code></pre></td></tr></table></figure>
+<p><strong>修改前</strong></p>
+<p><code>function activate(context) &#123;</code> 后直接注册运行命令：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">function</span> <span class="hljs-title function_">activate</span>(<span class="hljs-params">context</span>) &#123;<br>    <span class="hljs-comment">// Register the run command first to ensure it&#x27;s available even if language server fails</span><br>    <span class="hljs-keyword">const</span> runDisposable = vscode.<span class="hljs-property">commands</span>.<span class="hljs-title function_">registerCommand</span>(<span class="hljs-string">&#x27;runsagemathfile.run&#x27;</span>, <span class="hljs-title function_">async</span> () =&gt; &#123;<br></code></pre></td></tr></table></figure>
+<p>并且订阅列表原来只有运行命令和重启命令：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs js">context.<span class="hljs-property">subscriptions</span>.<span class="hljs-title function_">push</span>(runDisposable, restartDisposable);<br></code></pre></td></tr></table></figure>
+<p><strong>修改后</strong></p>
+<p>在 <code>function activate(context) &#123;</code> 后新增保存监听。修改后位置约为 <code>out/src/extension.js:33</code>：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">function</span> <span class="hljs-title function_">activate</span>(<span class="hljs-params">context</span>) &#123;<br>    <span class="hljs-keyword">const</span> moveCursorAfterSave = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Set</span>();<br>    <span class="hljs-keyword">const</span> ensureTrailingBlankLineDisposable = vscode.<span class="hljs-property">workspace</span>.<span class="hljs-title function_">onWillSaveTextDocument</span>(<span class="hljs-function"><span class="hljs-params">event</span> =&gt;</span> &#123;<br>        <span class="hljs-keyword">const</span> <span class="hljs-variable language_">document</span> = event.<span class="hljs-property">document</span>;<br>        <span class="hljs-keyword">if</span> (<span class="hljs-variable language_">document</span>.<span class="hljs-property">languageId</span> !== <span class="hljs-string">&#x27;sage&#x27;</span>) &#123;<br>            <span class="hljs-keyword">return</span>;<br>        &#125;<br>        <span class="hljs-keyword">const</span> text = <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">getText</span>();<br>        <span class="hljs-keyword">if</span> (!text || text.<span class="hljs-title function_">endsWith</span>(<span class="hljs-string">&#x27;\n&#x27;</span>) || text.<span class="hljs-title function_">endsWith</span>(<span class="hljs-string">&#x27;\r&#x27;</span>)) &#123;<br>            <span class="hljs-keyword">return</span>;<br>        &#125;<br>        <span class="hljs-keyword">const</span> lastLine = <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">lineAt</span>(<span class="hljs-variable language_">document</span>.<span class="hljs-property">lineCount</span> - <span class="hljs-number">1</span>);<br>        <span class="hljs-keyword">const</span> endPosition = <span class="hljs-keyword">new</span> vscode.<span class="hljs-title class_">Position</span>(<span class="hljs-variable language_">document</span>.<span class="hljs-property">lineCount</span> - <span class="hljs-number">1</span>, lastLine.<span class="hljs-property">text</span>.<span class="hljs-property">length</span>);<br>        <span class="hljs-keyword">const</span> eol = <span class="hljs-variable language_">document</span>.<span class="hljs-property">eol</span> === vscode.<span class="hljs-property">EndOfLine</span>.<span class="hljs-property">CRLF</span> ? <span class="hljs-string">&#x27;\r\n&#x27;</span> : <span class="hljs-string">&#x27;\n&#x27;</span>;<br>        moveCursorAfterSave.<span class="hljs-title function_">add</span>(<span class="hljs-variable language_">document</span>.<span class="hljs-property">uri</span>.<span class="hljs-title function_">toString</span>());<br>        event.<span class="hljs-title function_">waitUntil</span>(<span class="hljs-title class_">Promise</span>.<span class="hljs-title function_">resolve</span>([vscode.<span class="hljs-property">TextEdit</span>.<span class="hljs-title function_">insert</span>(endPosition, eol)]));<br>    &#125;);<br>    <span class="hljs-keyword">const</span> moveCursorToTrailingBlankLineDisposable = vscode.<span class="hljs-property">workspace</span>.<span class="hljs-title function_">onDidSaveTextDocument</span>(<span class="hljs-function"><span class="hljs-params">document</span> =&gt;</span> &#123;<br>        <span class="hljs-keyword">const</span> uri = <span class="hljs-variable language_">document</span>.<span class="hljs-property">uri</span>.<span class="hljs-title function_">toString</span>();<br>        <span class="hljs-keyword">if</span> (!moveCursorAfterSave.<span class="hljs-title function_">delete</span>(uri)) &#123;<br>            <span class="hljs-keyword">return</span>;<br>        &#125;<br>        <span class="hljs-keyword">const</span> editor = vscode.<span class="hljs-property">window</span>.<span class="hljs-property">activeTextEditor</span>;<br>        <span class="hljs-keyword">if</span> (!editor || editor.<span class="hljs-property">document</span>.<span class="hljs-property">uri</span>.<span class="hljs-title function_">toString</span>() !== uri) &#123;<br>            <span class="hljs-keyword">return</span>;<br>        &#125;<br>        <span class="hljs-keyword">const</span> position = <span class="hljs-keyword">new</span> vscode.<span class="hljs-title class_">Position</span>(<span class="hljs-variable language_">document</span>.<span class="hljs-property">lineCount</span> - <span class="hljs-number">1</span>, <span class="hljs-number">0</span>);<br>        editor.<span class="hljs-property">selection</span> = <span class="hljs-keyword">new</span> vscode.<span class="hljs-title class_">Selection</span>(position, position);<br>        editor.<span class="hljs-title function_">revealRange</span>(<span class="hljs-keyword">new</span> vscode.<span class="hljs-title class_">Range</span>(position, position));<br>    &#125;);<br>    <span class="hljs-comment">// Register the run command first to ensure it&#x27;s available even if language server fails</span><br></code></pre></td></tr></table></figure>
+<p>并把订阅列表改为 <code>out/src/extension.js:130</code> 的形式：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs js">context.<span class="hljs-property">subscriptions</span>.<span class="hljs-title function_">push</span>(ensureTrailingBlankLineDisposable, moveCursorToTrailingBlankLineDisposable, runDisposable, restartDisposable);<br></code></pre></td></tr></table></figure>
+</div></article><aside class="post-outline" aria-label="文章目录"><p class="post-outline__eyebrow">本文导航</p><p class="post-outline__title">按标题快速定位</p><nav class="post-toc" data-post-toc><ol class="post-toc__list"><li class="post-toc__list-item post-toc__list-level-1"><a class="post-toc__list-link" href="#%E5%AE%89%E8%A3%85-WSL"><span class="post-toc__list-text">安装 WSL</span></a><ol class="post-toc__list-child"><li class="post-toc__list-item post-toc__list-level-2"><a class="post-toc__list-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF-WSL"><span class="post-toc__list-text">什么是 WSL</span></a></li><li class="post-toc__list-item post-toc__list-level-2"><a class="post-toc__list-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E5%AE%89%E8%A3%85-WSL"><span class="post-toc__list-text">为什么要安装 WSL</span></a></li><li class="post-toc__list-item post-toc__list-level-2"><a class="post-toc__list-link" href="#%E4%BD%BF%E7%94%A8%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%AE%89%E8%A3%85"><span class="post-toc__list-text">使用命令行安装</span></a></li><li class="post-toc__list-item post-toc__list-level-2"><a class="post-toc__list-link" href="#Linux-%E5%9F%BA%E7%A1%80%E9%85%8D%E7%BD%AE"><span class="post-toc__list-text">Linux 基础配置</span></a></li></ol></li><li class="post-toc__list-item post-toc__list-level-1"><a class="post-toc__list-link" href="#%E5%AE%89%E8%A3%85-conda-%E5%8F%8A-sagemath"><span class="post-toc__list-text">安装 conda 及 sagemath</span></a><ol class="post-toc__list-child"><li class="post-toc__list-item post-toc__list-level-2"><a class="post-toc__list-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF-conda"><span class="post-toc__list-text">什么是 conda</span></a></li><li class="post-toc__list-item post-toc__list-level-2"><a class="post-toc__list-link" href="#%E5%AE%89%E8%A3%85-conda"><span class="post-toc__list-text">安装 conda</span></a></li><li class="post-toc__list-item post-toc__list-level-2"><a class="post-toc__list-link" href="#%E5%AE%89%E8%A3%85-sagemath"><span class="post-toc__list-text">安装 sagemath</span></a></li><li class="post-toc__list-item post-toc__list-level-2"><a class="post-toc__list-link" href="#%E5%AE%89%E8%A3%85%E7%AC%AC%E4%B8%89%E6%96%B9%E6%A8%A1%E5%9D%97"><span class="post-toc__list-text">安装第三方模块</span></a></li></ol></li><li class="post-toc__list-item post-toc__list-level-1"><a class="post-toc__list-link" href="#%E9%85%8D%E7%BD%AE-VSCode-%E5%8F%8A%E5%85%B6%E6%89%A9%E5%B1%95"><span class="post-toc__list-text">配置 VSCode 及其扩展</span></a><ol class="post-toc__list-child"><li class="post-toc__list-item post-toc__list-level-2"><a class="post-toc__list-link" href="#%E8%AF%AD%E6%B3%95%E5%B7%AE%E5%BC%82"><span class="post-toc__list-text">语法差异</span></a></li><li class="post-toc__list-item post-toc__list-level-2"><a class="post-toc__list-link" href="#%E4%BF%AE%E6%94%B9%E6%89%A9%E5%B1%95%EF%BC%88%E5%8F%AF%E9%80%89%EF%BC%89"><span class="post-toc__list-text">修改扩展（可选）</span></a><ol class="post-toc__list-child"><li class="post-toc__list-item post-toc__list-level-3"><a class="post-toc__list-link" href="#%E8%AF%AD%E8%A8%80%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%AF%B7%E6%B1%82%E9%94%99%E8%AF%AF"><span class="post-toc__list-text">语言服务器请求错误</span></a></li><li class="post-toc__list-item post-toc__list-level-3"><a class="post-toc__list-link" href="#%E5%A4%9A%E8%A1%8C%E7%9F%A9%E9%98%B5%E8%AF%AF%E6%8A%A5-Unmatched-parentheses-on-line-x"><span class="post-toc__list-text">多行矩阵误报 Unmatched parentheses on line x</span></a></li><li class="post-toc__list-item post-toc__list-level-3"><a class="post-toc__list-link" href="#%E7%82%B9%E5%87%BB-Run-SageMath-File-%E5%89%8D%E8%87%AA%E5%8A%A8%E4%BF%9D%E5%AD%98"><span class="post-toc__list-text">点击 Run SageMath File 前自动保存</span></a></li><li class="post-toc__list-item post-toc__list-level-3"><a class="post-toc__list-link" href="#%E4%BF%9D%E5%AD%98%E6%97%B6%E8%A1%A5%E6%9C%AB%E5%B0%BE%E7%A9%BA%E8%A1%8C%E5%B9%B6%E7%A7%BB%E5%8A%A8%E5%85%89%E6%A0%87"><span class="post-toc__list-text">保存时补末尾空行并移动光标</span></a></li></ol></li></ol></li></ol></nav></aside></div><nav class="post-nav"><a class="post-nav__item post-nav__item--prev" href="/2026/09/12/%E6%B9%BE%E5%8C%BA%E6%9D%AF-2026/"><span class="post-nav__label">上一篇</span><strong>湾区杯-2026</strong></a><a class="post-nav__item post-nav__item--next" href="/2026/08/22/%E8%A5%BF%E6%B9%96%E8%AE%BA%E5%89%91-2026/"><span class="post-nav__label">下一篇</span><strong>西湖论剑-2026</strong></a></nav></main><footer class="site-footer"><div class="busuanzi-count" style="position: fixed; right: 20px; bottom: 20px; z-index: 999; font-size: 0.9em; color: #888;"><span id="busuanzi_container_site_uv">本站总访客数<span id="busuanzi_value_site_uv"></span> 人次</span><span style="margin: 0 8px;">|</span><span id="busuanzi_container_site_pv">本站总访问量<span id="busuanzi_value_site_pv"></span> 次</span></div><p class="site-footer__text"></p></footer></div></body></html>
