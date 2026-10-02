@@ -1,0 +1,115 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="theme-color" content="#496b8c"><meta name="description" content="照烟"><meta name="author" content="照烟"><meta name="generator" content="Hexo 8.1.1"><title>Linux相关 | 照烟</title><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/viewerjs/1.11.6/viewer.min.css"><link rel="stylesheet" href="/css/hsad-theme.css"><script src="https://cdnjs.cloudflare.com/ajax/libs/viewerjs/1.11.6/viewer.min.js"></script><script src="/js/hsad-theme.js" defer></script><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></head><body class="view-inner view-post"><div class="reading-progress" aria-hidden="true"><span class="reading-progress__bar" data-reading-progress></span></div><div class="page-aura page-aura--one"></div><div class="page-aura page-aura--two"></div><div class="site-shell"><aside class="site-sidebar"><section class="sidebar sidebar--desktop"><div class="sidebar__backdrop" style="background-image:url(/images/background.png)"></div><div class="sidebar__overlay"></div><div class="sidebar__content"><a class="sidebar__brand" href="/"><img class="sidebar__avatar" src="/images/avatar.jpg" alt="照烟"><div class="sidebar__identity"><h2 class="sidebar__title">照烟</h2><p class="sidebar__subtitle">zha0y3n</p></div></a><p class="sidebar__description">结局的彼岸，不再空无一人。</p><nav class="sidebar__nav" aria-label="Primary"><a href="/">首页</a><a href="/archives/">归档</a><a href="/categories/">分类</a><a href="/tags/">标签</a><a href="/links/">友链</a><a href="/about/">关于</a></nav><div class="sidebar__social"><a href="https://github.com/zha0y3n" target="_blank" rel="noopener">GitHub</a><a href="mailto:3509864228@qq.com" target="_blank" rel="noopener">E-Mail</a></div></div></section></aside><div class="mobile-topbar"><button class="mobile-topbar__toggle js-drawer-toggle" type="button" aria-label="Open navigation"><span></span><span></span><span></span></button><a class="mobile-topbar__title" href="/">照烟</a><a class="mobile-topbar__avatar" href="/"><img src="/images/avatar.jpg" alt="照烟"></a></div><div class="mobile-drawer" data-drawer aria-hidden="true"><div class="mobile-drawer__panel"><section class="sidebar sidebar--mobile"><div class="sidebar__backdrop" style="background-image:url(/images/background.png)"></div><div class="sidebar__overlay"></div><div class="sidebar__content"><a class="sidebar__brand" href="/"><img class="sidebar__avatar" src="/images/avatar.jpg" alt="照烟"><div class="sidebar__identity"><h2 class="sidebar__title">照烟</h2><p class="sidebar__subtitle">zha0y3n</p></div></a><p class="sidebar__description">结局的彼岸，不再空无一人。</p><nav class="sidebar__nav" aria-label="Primary"><a href="/">首页</a><a href="/archives/">归档</a><a href="/categories/">分类</a><a href="/tags/">标签</a><a href="/links/">友链</a><a href="/about/">关于</a></nav><div class="sidebar__social"><a href="https://github.com/zha0y3n" target="_blank" rel="noopener">GitHub</a><a href="mailto:3509864228@qq.com" target="_blank" rel="noopener">E-Mail</a></div></div></section></div></div><div class="mobile-backdrop js-drawer-close"></div><main class="site-main"><div class="article-layout article-layout--with-toc"><article class="article"><header class="article__header"><div class="article__eyebrow"><a href="/categories/%E7%AC%94%E8%AE%B0/">笔记</a></div><h1 class="article__title">Linux相关</h1><div class="article__meta"><time datetime="2026-09-21T12:50:51.000Z">2026-09-21</time><span class="article__divider">/</span><span>更新于 2026-10-01</span></div></header><div class="article__content"><p>Linux 是一个开源的、类 Unix 的操作系统内核。平时我们说的 Linux 系统通常指 <strong>Linux 内核+GNU 工具包+软件包管理器+桌面环境等</strong> 组成的完整操作系统，也叫 GNU/Linux。</p>
+<p>Linux 的可移植性极强，从嵌入式设备、路由器到服务器，再到超级计算机都能运行。普通人极少直接打开 Linux 桌面，但几乎离不开背后运行的 Linux。</p>
+<p>常见发行版：Ubuntu、Debian、Fedora、CentOS、Red Hat、Arch、openSUSE、Kali 等。不同发行版在软件包管理、更新方式和用途上有所不同。</p>
+<h1 id="什么是-GNU">什么是 GNU</h1>
+<p>GNU 是一个自由软件项目，递归缩写为 “GNU’s Not Unix”。其开发了大量操作系统必需的用户空间软件：</p>
+<ul>
+<li>核心命令行工具：<code>ls</code>、<code>cp</code>、<code>mv</code> 等，属于 GNU Coreutils</li>
+<li>Shell：bash</li>
+<li>编译器：GCC</li>
+<li>C 库：glibc</li>
+<li>调试器：GDB</li>
+<li>…</li>
+</ul>
+<p>GNU 自己也设计了一个内核，叫 GNU Hurd，但长期没有真正普及。后来 Linux 内核出现，和 GNU 的用户空间工具组合在一起，形成了一个完整可用的自由操作系统。</p>
+<h1 id="“万物皆文件”">“万物皆文件”</h1>
+<p>在 Linux 中，很多不同类型的资源都被抽象为文件系统里的对象，通过统一的文件接口来访问。</p>
+<p>根目录下的层级结构严格遵循文件系统层级规范，将底层内核、管理命令、用户数据、虚拟状态与第三方软件严格隔离开。</p>
+<h2 id="引导启动与基础二进制">引导启动与基础二进制</h2>
+<ul>
+<li>
+<p><code>/boot</code>：作为系统启动的核心目录，包含 Linux 内核镜像、初始内存盘镜像以及引导加载程序等，系统启动完成后通常处于只读状态。</p>
+</li>
+<li>
+<p><code>/bin</code>、<code>/sbin</code>：可执行程序目录，实际位置在 <code>/usr/bin</code> 、 <code>/usr/sbin</code>。</p>
+<p>传统意义上，<code>/bin</code> 中存放的是系统级工具（GNU Coreutils），不混杂第三方程序。但后来发行版将 <code>/bin</code> 软链至 <code>/usr/bin</code>，而 <code>/usr/bin</code> 本来就装了大量发行版打包的第三方软件，所以目前来说，<code>/bin</code> 下是二进制软件共存的目录。</p>
+<p>第三方软件怎么放才规范？</p>
+<ul>
+<li>发行版仓库安装的第三方： <code>/usr/bin</code>，由包管理器管理</li>
+<li>自己编译安装的： <code>/usr/local/bin</code></li>
+<li>独立大型软件：<code>/opt</code></li>
+<li>用户私有：<code>~/.local/bin</code></li>
+</ul>
+</li>
+<li>
+<p><code>/lib</code>、<code>/lib64</code>：动态链接库目录，实际位置在 <code>/usr/lib</code>、<code>/usr/lib64</code>。</p>
+<p>动态链接库是一种程序运行时才按需加载的共享代码包，允许多个程序共用同一份功能，从而大幅节省内存空间（修改链接包本身无需重新编译主程序，即具有热更新特性）</p>
+</li>
+</ul>
+<h2 id="配置文件与用户工作区">配置文件与用户工作区</h2>
+<ul>
+<li><code>/etc</code>：系统级全局配置文件目录。存放所有系统服务、网络协议和守护进程的纯文本配置文件（如 <code>/etc/passwd</code>、<code>/etc/fstab</code>、<code>/etc/hosts</code>、<code>/etc/nginx</code> 等）</li>
+<li><code>/root</code>：超级管理员的专属家目录。</li>
+<li><code>/home</code>：普通用户的家目录存储区，系统为每一个普通用户分配一个子目录，存放用户的个人数据及配置文件（如 <code>~/.bashrc</code>）</li>
+</ul>
+<h2 id="虚拟、设备与临时文件系统">虚拟、设备与临时文件系统</h2>
+<ul>
+<li>
+<p><code>/dev</code>：设备节点目录，映射系统中的硬件设备，如硬盘分区 <code>/dev/sda1</code>、终端设备 <code>/dev/tty</code> 以及特殊伪设备 <code>/dev/null</code>（读返回 EOF，写被丢弃）、<code>/dev/zero</code>（读返回 NUL 字节，写被丢弃）、<code>/dev/urandom</code>（生成伪随机字节）</p>
+</li>
+<li>
+<p><code>/proc</code>：内核与进程状态镜像，以文件形式呈现运行中进程的内存与运行数据（<code>/proc/[PID]</code>），以及系统软硬件实时统计（如 <code>/proc/meminfo</code>、<code>/proc/cpuinfo</code>。但是更常用的替代是 <code>free -h</code> 和 <code>lscpu</code>）</p>
+</li>
+<li>
+<p><code>/sys</code>：将内核中识别到的物理设备、驱动程序、总线（PCI、USB）按统一层次树呈现，支持直接读写控制硬件参数。</p>
+</li>
+<li>
+<p><code>/tmp</code>：全局临时文件目录，供所有程序和用户存放短期临时数据。</p>
+</li>
+<li>
+<p><code>/mnt</code> 与 <code>/media</code>：外部存储挂载点。</p>
+</li>
+</ul>
+<h2 id="应用程序与可变状态">应用程序与可变状态</h2>
+<ul>
+<li><code>/usr</code>：系统资源目录，系统安装的绝大多数软件实体所在地。</li>
+<li><code>/var</code>：可变数据目录，用于存储运行时不断变化的数据（日志、缓存、队列、数据库等）
+<ul>
+<li><code>/var/log</code>：系统日志</li>
+<li><code>/var/cache</code>：包管理器缓存</li>
+<li><code>/var/lib</code>：服务数据与数据库</li>
+<li><code>/var/www/html</code>：Debian/Ubuntu 系的 Apache 默认主站点目录</li>
+</ul>
+</li>
+<li><code>/opt</code>：可选附加应用软件包，一般用于存放独立的第三方闭源或商业文件（如 Chorme、Docker 等）</li>
+</ul>
+<h1 id="权限">权限</h1>
+<h2 id="用户与用户组">用户与用户组</h2>
+<p>Linux 把系统内的实体抽象为 UID（用户）和 GID（用户组），内核鉴权时只看 ID。</p>
+<p>root 作为超级管理员拥有最高权限，UID 为 0，不受任何限制；普通用户 UID 一般从 1000 开始，只能动自己权限范围内的东西。此外还有系统用户，供后台守护进程使用（UID 1~999）</p>
+<p>输入 <code>id</code>，查看当前用户的 UID、主组 GID 以及附加组。<code>whoami</code> 查看当前用户名。</p>
+<p>用户组用来把一批用户打包，统一管理权限。输入 <code>groups</code> 查看当前用户加入了哪些组。</p>
+<p>相关操作：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 创建用户：指定家目录、默认 shell，并自动创建同名主组</span><br>useradd -m -s /bin/bash alice<br><br><span class="hljs-comment"># 将用户附加到次要组（如 docker 组，-a 代表 append 追加，绝不能漏掉）</span><br>usermod -aG docker alice<br><br><span class="hljs-comment"># 删除用户并同时清理其家目录与邮箱</span><br>userdel -r alice<br></code></pre></td></tr></table></figure>
+<h2 id="UGO-文件权限模型">UGO 文件权限模型</h2>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">-  rwx  r-x  r--<br>┬  ──┬  ──┬  ──┬<br>│    │    │    └─ Other (其他所有人)<br>│    │    └────── Group (所属组成员)<br>│    └─────────── User/Owner (文件属主)<br>└──────────────── 文件类型 (- 普通文件, d 目录, l 符号链接, c 字符设备, b 块设备)<br></code></pre></td></tr></table></figure>
+<p>UGO = 按“你是谁”把人分成三类（属主 U，属组 G，其它人 O），每类一份 rwx（可读 r，可写 w，可执行 x）</p>
+<p>系统判断时只认一类：若既是属主也是属组，则只看 U 权限（即使 G 权限大于 U）</p>
+<p>想查看文件权限模型使用 <code>ls -l</code>，更改使用 <code>chmod</code>，换属主用 <code>chown</code>：</p>
+<ul>
+<li>
+<p><code>ls -l file.txt</code></p>
+</li>
+<li>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">chmod</span> u+x file.txt    <span class="hljs-comment"># 给 U（主人）加上 x</span><br><span class="hljs-built_in">chmod</span> g-w file.txt    <span class="hljs-comment"># 去掉 G（同组人）的 w</span><br><span class="hljs-built_in">chmod</span> o-r file.txt    <span class="hljs-comment"># 去掉 O（陌生人）的 r</span><br><br><span class="hljs-built_in">chmod</span> 644 file.txt    <span class="hljs-comment"># 数字写法：rw- | r-- | r--</span><br>                      <span class="hljs-comment"># 数字就是 r = 4, w = 2, x = 1 相加，比如 6 = 4+2 = rw-</span><br></code></pre></td></tr></table></figure>
+</li>
+<li>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">sudo</span> <span class="hljs-built_in">chown</span> tom file.txt         <span class="hljs-comment"># 把主人（U）换成 tom</span><br><span class="hljs-built_in">sudo</span> <span class="hljs-built_in">chown</span> tom:docker file.txt  <span class="hljs-comment"># 主人换成 tom，组（G）换成 docker</span><br><span class="hljs-built_in">sudo</span> <span class="hljs-built_in">chgrp</span> docker file.txt      <span class="hljs-comment"># 只换组，效果同上后半句</span><br></code></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="数字表示法">数字表示法</h3>
+<p>用八进制表示。对于 rwx-，<code>r = 4, w = 2, x = 1, - = 0</code>，全部加起来能够唯一确定三种用户的权限。</p>
+<p>比如 <code>rw-r--r--</code>，U 的分值是 6，G 的分值是 4，O 的分值也是 4，连起来就是 644（普通文件默认）</p>
+<p>目录的 <code>x</code> 意味着能否进入此目录。</p>
+<p>常见有：</p>
+<ul>
+<li>644：<code>rw- | r-- | r--</code>，普通文件</li>
+<li>600：<code>rw- | --- | ---</code>，常见于私钥文件</li>
+<li>755：<code>rwx | r-x | r-x</code>，可能是目录或可执行文件</li>
+<li>700：<code>rwx | --- | ---</code>，只有主人可进入的目录，比如 <code>~/.ssh</code></li>
+<li>777：<code>rwx | rwx | rwx</code>，最省事的一集</li>
+</ul>
+<p>常用命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 数字模式修改：属主读写执行，属组读执行，其他无权限</span><br><span class="hljs-built_in">chmod</span> 750 /opt/app<br><br><span class="hljs-comment"># 符号模式修改：给属主增加执行权限，剥夺其他人的写权限</span><br><span class="hljs-built_in">chmod</span> u+x,o-w script.sh<br><br><span class="hljs-comment"># 递归修改文件及子目录的属主与属组</span><br><span class="hljs-built_in">chown</span> -R www-data:www-data /var/www/html<br></code></pre></td></tr></table></figure>
+<h1 id="进程与服务管理">进程与服务管理</h1>
+</div></article><aside class="post-outline" aria-label="文章目录"><p class="post-outline__eyebrow">本文导航</p><p class="post-outline__title">按标题快速定位</p><nav class="post-toc" data-post-toc><ol class="post-toc__list"><li class="post-toc__list-item post-toc__list-level-1"><a class="post-toc__list-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF-GNU"><span class="post-toc__list-text">什么是 GNU</span></a></li><li class="post-toc__list-item post-toc__list-level-1"><a class="post-toc__list-link" href="#%E2%80%9C%E4%B8%87%E7%89%A9%E7%9A%86%E6%96%87%E4%BB%B6%E2%80%9D"><span class="post-toc__list-text">“万物皆文件”</span></a><ol class="post-toc__list-child"><li class="post-toc__list-item post-toc__list-level-2"><a class="post-toc__list-link" href="#%E5%BC%95%E5%AF%BC%E5%90%AF%E5%8A%A8%E4%B8%8E%E5%9F%BA%E7%A1%80%E4%BA%8C%E8%BF%9B%E5%88%B6"><span class="post-toc__list-text">引导启动与基础二进制</span></a></li><li class="post-toc__list-item post-toc__list-level-2"><a class="post-toc__list-link" href="#%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E4%B8%8E%E7%94%A8%E6%88%B7%E5%B7%A5%E4%BD%9C%E5%8C%BA"><span class="post-toc__list-text">配置文件与用户工作区</span></a></li><li class="post-toc__list-item post-toc__list-level-2"><a class="post-toc__list-link" href="#%E8%99%9A%E6%8B%9F%E3%80%81%E8%AE%BE%E5%A4%87%E4%B8%8E%E4%B8%B4%E6%97%B6%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F"><span class="post-toc__list-text">虚拟、设备与临时文件系统</span></a></li><li class="post-toc__list-item post-toc__list-level-2"><a class="post-toc__list-link" href="#%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E4%B8%8E%E5%8F%AF%E5%8F%98%E7%8A%B6%E6%80%81"><span class="post-toc__list-text">应用程序与可变状态</span></a></li></ol></li><li class="post-toc__list-item post-toc__list-level-1"><a class="post-toc__list-link" href="#%E6%9D%83%E9%99%90"><span class="post-toc__list-text">权限</span></a><ol class="post-toc__list-child"><li class="post-toc__list-item post-toc__list-level-2"><a class="post-toc__list-link" href="#%E7%94%A8%E6%88%B7%E4%B8%8E%E7%94%A8%E6%88%B7%E7%BB%84"><span class="post-toc__list-text">用户与用户组</span></a></li><li class="post-toc__list-item post-toc__list-level-2"><a class="post-toc__list-link" href="#UGO-%E6%96%87%E4%BB%B6%E6%9D%83%E9%99%90%E6%A8%A1%E5%9E%8B"><span class="post-toc__list-text">UGO 文件权限模型</span></a><ol class="post-toc__list-child"><li class="post-toc__list-item post-toc__list-level-3"><a class="post-toc__list-link" href="#%E6%95%B0%E5%AD%97%E8%A1%A8%E7%A4%BA%E6%B3%95"><span class="post-toc__list-text">数字表示法</span></a></li></ol></li></ol></li><li class="post-toc__list-item post-toc__list-level-1"><a class="post-toc__list-link" href="#%E8%BF%9B%E7%A8%8B%E4%B8%8E%E6%9C%8D%E5%8A%A1%E7%AE%A1%E7%90%86"><span class="post-toc__list-text">进程与服务管理</span></a></li></ol></nav></aside></div><nav class="post-nav"><a class="post-nav__item post-nav__item--prev" href="/2026/10/01/%E5%88%9B%E5%AE%87%E6%9D%AF-2026/"><span class="post-nav__label">上一篇</span><strong>创宇杯-2026</strong></a><a class="post-nav__item post-nav__item--next" href="/2026/09/12/%E6%B9%BE%E5%8C%BA%E6%9D%AF-2026/"><span class="post-nav__label">下一篇</span><strong>湾区杯-2026</strong></a></nav></main><footer class="site-footer"><div class="busuanzi-count" style="position: fixed; right: 20px; bottom: 20px; z-index: 999; font-size: 0.9em; color: #888;"><span id="busuanzi_container_site_uv">本站总访客数<span id="busuanzi_value_site_uv"></span> 人次</span><span style="margin: 0 8px;">|</span><span id="busuanzi_container_site_pv">本站总访问量<span id="busuanzi_value_site_pv"></span> 次</span></div><p class="site-footer__text"></p></footer></div></body></html>
