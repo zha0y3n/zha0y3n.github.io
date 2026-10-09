@@ -386,19 +386,11 @@ img {
   line-height: 1.6;
 }
 
-.post-card__summary,
 .friend-card__desc {
   margin: 0.5rem 0 0;
   color: var(--text-soft);
   font-size: 0.9rem;
   line-height: 1.72;
-}
-
-.post-card__summary {
-  display: -webkit-box;
-  overflow: hidden;
-  -webkit-line-clamp: 1;
-  -webkit-box-orient: vertical;
 }
 
 .post-card__more {
