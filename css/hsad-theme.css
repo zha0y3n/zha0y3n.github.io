@@ -1205,6 +1205,19 @@ img {
   color: var(--accent);
 }
 
+.busuanzi-count {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  z-index: 999;
+  font-size: 0.9em;
+  color: #888;
+}
+
+.busuanzi-count__sep {
+  margin: 0 8px;
+}
+
 .mobile-topbar,
 .mobile-drawer,
 .mobile-backdrop {
@@ -1328,8 +1341,39 @@ img {
     padding: 0 0.95rem 1.5rem;
   }
 
+  .busuanzi-count {
+    position: static;
+    margin-bottom: 0.6rem;
+    font-size: 0.78rem;
+    line-height: 1.6;
+  }
+
+  .busuanzi-count__sep {
+    margin: 0 6px;
+  }
+
+  /* 长链接、长行内代码允许断行 */
+  .article__content {
+    overflow-wrap: anywhere;
+  }
+
+  /* 宽公式、宽表格在自身内部横向滚动，不撑开页面 */
+  .article__content mjx-container {
+    display: inline-block;
+    max-width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+    vertical-align: middle;
+  }
+
+  .article__content > table {
+    display: block;
+    overflow-x: auto;
+    overflow-wrap: normal;
+  }
+
   .article-layout--with-toc {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
     grid-template-areas:
       "toc"
       "main";
